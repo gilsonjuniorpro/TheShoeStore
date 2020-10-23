@@ -39,7 +39,9 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/registerFragment"
+            app:popUpToInclusive="true"/>
         />
     </fragment>
     <fragment
@@ -60,7 +62,6 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
-        />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -68,11 +69,9 @@
         android:label="Detail Fragment"
         tools:layout="@layout/fragment_detail">
         <argument
-            android:name="numQuestions"
-            app:argType="integer" />
-        <argument
-            android:name="numCorrect"
-            app:argType="integer" />
+            android:name="shoe"
+            app:argType="theshoestore.ca.model.Shoes" />
+        />
         <action
             android:id="@+id/action_detailFragment_to_listFragment"
             app:destination="@id/listFragment"

@@ -1,31 +1,16 @@
 <resources>
-    <string name="app_name">The Shoe Store</string>
-
+    <string name="app_name">The Shoes Store</string>
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
-
     <string name="msg_fill_all_fields">Fill all fields to login</string>
-
-    <string name="start">GOT IT</string>
-
-    <string name="slide_1_title">Make</string>
-    <string name="slide_1_desc">The easiest way to communicate an urban problem to the city hall of your city!</string>
-
-    <string name="slide_2_title">Paving problem</string>
-    <string name="slide_2_desc">If you see a paving problem, take a picture and attach to your post</string>
-
-    <string name="slide_3_title">Map</string>
-    <string name="slide_3_desc">Search your location through the app</string>
-
-    <string name="slide_4_title">Google Sign</string>
-    <string name="slide_4_desc">Use your google profile to sign in without register</string>
-
-    <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
-    <string name="play_again">Play Again</string>
     <string name="password">password</string>
     <string name="email">email</string>
     <string name="login">login</string>
     <string name="create_an_account">create an account</string>
     <string name="description">description</string>
-    <string name="shoe_name">Shoe Name</string>
+    <string name="shoe_name">Shoes Name</string>
+    <string name="slide_title">Shoes name</string>
+    <string name="slide_desc">Shoes description</string>
+    <string name="name">name</string>
+    <string name="register_user">Register User</string>
 </resources>

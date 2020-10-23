@@ -5,27 +5,27 @@ import theshoestore.ca.R
 object Starter {
     val starters = arrayOf(
         Item(
-            "Shoe 1",
-            "body 1",
-            R.drawable.ic_make,
+            "THE HISTORY AND EVOLUTION OF SHOES",
+            "It’s hard to imagine what life was like when shoes weren’t discovered yet. Everything started because of a real and practical need to protect the feet from outside effects.",
+            R.drawable.intro001,
             R.color.colorScreen1
         ),
         Item(
-            "Shoe 2",
-            "body 2",
-            R.drawable.ic_map,
+            "WHEN DID THE FIRST SHOES APPEAR?",
+            "1991 is an important date in the history of footwear because this is the year when, at the border of Austria and Italy",
+            R.drawable.intro002,
             R.color.colorScreen2
         ),
         Item(
-            "Shoe 3",
-            "body 3",
-            R.drawable.ic_paving,
+            "THE HISTORY OF FOOTWEAR",
+            "The first sandals emerged in ancient Egypt. They were made from palm leaves, papyrus fiber and raw leather. ",
+            R.drawable.intro003,
             R.color.colorScreen3
         ),
         Item(
-            "Shoe 4",
-            "body 4",
-            R.drawable.ic_sign,
+            "THE MIDDLE AGES(476–1453)",
+            "Although the Middle Ages are considered the dark ages, it was during this time that a lot of new footwear trends and fashion appeared.",
+            R.drawable.intro004,
             R.color.colorScreen4
         )
     )
