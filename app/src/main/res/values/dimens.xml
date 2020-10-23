@@ -1,0 +1,55 @@
+<resources>
+    <dimen name="recycler_top">60dp</dimen>
+    <dimen name="recycler_bottom">54dp</dimen>
+    <dimen name="fab_margin_end">8dp</dimen>
+    <dimen name="fab_margin_bottom">66dp</dimen>
+    <dimen name="icon_user">50dp</dimen>
+    <dimen name="icon_user_border">2dp</dimen>
+    <dimen name="image_problem">225dp</dimen>
+    <dimen name="icons_card">20dp</dimen>
+    <dimen name="card_elevation">3dp</dimen>
+    <dimen name="map_elevation">10dp</dimen>
+    <dimen name="card_radius">0dp</dimen>
+    <dimen name="detail_backdrop_height">250dp</dimen>
+    <dimen name="image_user_radius">96dp</dimen>
+    <dimen name="collapsing_end">64dp</dimen>
+    <dimen name="collapsing_start">48dp</dimen>
+    <dimen name="backdrop_height">235dp</dimen>
+    <dimen name="backdrop_title">25dp</dimen>
+    <dimen name="scroll_detail">80dp</dimen>
+    <dimen name="line_separator">1dp</dimen>
+    <dimen name="bt_follow_width">200dp</dimen>
+    <dimen name="bt_follow_height">34dp</dimen>
+    <dimen name="no_padding">0dp</dimen>
+    <dimen name="small_padding">5dp</dimen>
+    <dimen name="medium_padding">10dp</dimen>
+    <dimen name="large_padding">18dp</dimen>
+    <dimen name="extra_large_padding">25dp</dimen>
+    <dimen name="no_margin">0dp</dimen>
+    <dimen name="small_margin">5dp</dimen>
+    <dimen name="medium_margin">10dp</dimen>
+    <dimen name="large_margin">18dp</dimen>
+    <dimen name="extra_large_margin">25dp</dimen>
+    <dimen name="extra_extra_large_margin">40dp</dimen>
+    <dimen name="bt_logout_margin">100dp</dimen>
+    <dimen name="font_title">25sp</dimen>
+    <dimen name="font_inputs">14sp</dimen>
+    <dimen name="font_small">10dp</dimen>
+    <dimen name="font_medium">12dp</dimen>
+    <dimen name="font_large">15dp</dimen>
+    <dimen name="font_extra_large">18dp</dimen>
+    <dimen name="image_register_width">300dp</dimen>
+    <dimen name="image_register_height">225dp</dimen>
+    <bool name="is_tablet">false</bool>
+
+
+    <dimen name="img_width_height">120dp</dimen>
+    <dimen name="slide_title">30dp</dimen>
+    <dimen name="slide_desc">16dp</dimen>
+    <dimen name="desc_padding">40dp</dimen>
+
+
+
+    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_margin_bottom">20dp</dimen>
+</resources>
