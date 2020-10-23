@@ -26,4 +26,6 @@
     <string name="email">email</string>
     <string name="login">login</string>
     <string name="create_an_account">create an account</string>
+    <string name="description">description</string>
+    <string name="shoe_name">Shoe Name</string>
 </resources>

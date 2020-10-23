@@ -14,6 +14,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -91,10 +93,11 @@ class IntroActivity : AppCompatActivity() {
             holder.tvStarter.text = starters[position].body
             holder.tvStarterTitle.text = starters[position].title
             holder.ivImage.setImageDrawable(
-                context.resources.getDrawable(starters[position].image),
+                ResourcesCompat.getDrawable(context.resources,
+                    starters[position].image, null)
             )
             holder.container.setBackgroundColor(
-                context.resources.getColor(starters[position].color)
+                ContextCompat.getColor(context, starters[position].color)
             )
         }
 

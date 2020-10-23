@@ -8,7 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-
     <color name="colorPrimary">#292929</color>
     <color name="colorPrimaryDark">#292929</color>
     <color name="colorAccent">#fdbe3b</color>
@@ -19,6 +18,7 @@
     <color name="colorScreen3">#ff4842</color>
     <color name="colorScreen4">#f8591a</color>
 
+    <color name="colorMediumGray" >#f3f3f3</color>
     <color name="colorBackgroundLayout">#312e37</color>
     <color name="colorEdittext">#fdbe3b</color>
     <color name="colorBackgroundCard">#23222a</color>
