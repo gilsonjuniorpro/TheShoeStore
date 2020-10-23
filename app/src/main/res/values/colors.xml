@@ -18,4 +18,13 @@
     <color name="colorScreen2">#e08e19</color>
     <color name="colorScreen3">#ff4842</color>
     <color name="colorScreen4">#f8591a</color>
+
+    <color name="colorBackgroundLayout">#312e37</color>
+    <color name="colorEdittext">#fdbe3b</color>
+    <color name="colorBackgroundCard">#23222a</color>
+    <color name="colorBackgroundEdittext">#29292E</color>
+    <color name="colorTextButton">#23222a</color>
+    <color name="colorTextCard">#ACACAC</color>
+    <color name="colorTextTime">#B3B3B5</color>
+    <color name="colorBackgroundButton">#fdbe3b</color>
 </resources>

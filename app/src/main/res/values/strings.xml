@@ -3,6 +3,9 @@
 
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
+
+    <string name="msg_fill_all_fields">Fill all fields to login</string>
+
     <string name="start">GOT IT</string>
 
     <string name="slide_1_title">Make</string>
@@ -19,4 +22,8 @@
 
     <string name="play_again_desc">To see the welcome slider again, goto Settings -> apps -> welcome slider -> clear data</string>
     <string name="play_again">Play Again</string>
+    <string name="password">password</string>
+    <string name="email">email</string>
+    <string name="login">login</string>
+    <string name="create_an_account">create an account</string>
 </resources>

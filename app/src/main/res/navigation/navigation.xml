@@ -15,7 +15,9 @@
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@+id/loginFragment"
+            app:popUpToInclusive="true"/>
         />
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
@@ -45,6 +47,12 @@
         android:name="theshoestore.ca.ui.fragment.ListFragment"
         android:label="List Fragment"
         tools:layout="@layout/fragment_list">
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="password"
+            app:argType="string" />
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
             app:destination="@id/detailFragment"
@@ -68,10 +76,10 @@
         <action
             android:id="@+id/action_detailFragment_to_listFragment"
             app:destination="@id/listFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
+            app:enterAnim="@anim/slide_out_left"
+            app:exitAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_out_right"
+            app:popExitAnim="@anim/slide_in_left"
             app:popUpTo="@+id/listFragment"/>
     </fragment>
 </navigation>

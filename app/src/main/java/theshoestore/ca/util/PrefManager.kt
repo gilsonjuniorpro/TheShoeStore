@@ -7,7 +7,6 @@ import android.content.SharedPreferences.Editor
 class PrefManager(context: Context?) {
     var pref: SharedPreferences? = null
     var editor: Editor? = null
-    var _context: Context? = null
 
     var PRIVATE_MODE = 0
 
@@ -22,12 +21,12 @@ class PrefManager(context: Context?) {
 
     fun setFirstTimeLaunch(isFirstTime: Boolean) {
         editor!!.putBoolean(IS_FIRST_TIME_LAUNCH, isFirstTime)
-        //editor.putBoolean(IS_FIRST_TIME_LAUNCH, true);
+        //editor!!.putBoolean(IS_FIRST_TIME_LAUNCH, true)
         editor!!.commit()
     }
 
     fun isFirstTimeLaunch(): Boolean {
-        //return pref.getBoolean(IS_FIRST_TIME_LAUNCH, true);
-        return true
+        return pref!!.getBoolean(IS_FIRST_TIME_LAUNCH, true)
+        //return true
     }
 }

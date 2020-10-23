@@ -4,12 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -28,15 +31,14 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(
-                this, R.layout.activity_intro)
+            this, R.layout.activity_intro
+        )
 
         changeStatusBarColor()
 
         mPrefManager = PrefManager(this)
         if (!mPrefManager.isFirstTimeLaunch()) {
             gotToLogin()
-        }else{
-            Log.i("intro", "here")
         }
 
         binding.viewPager.adapter = StarterPagerAdapter(Starter.starters, this)
@@ -61,6 +63,7 @@ class IntroActivity : AppCompatActivity() {
     }
 
     private fun gotToLogin(){
+        mPrefManager.setFirstTimeLaunch(false)
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
@@ -79,8 +82,8 @@ class IntroActivity : AppCompatActivity() {
     class StarterPagerAdapter(private val starters: Array<Starter.Item>, var context: Context) : RecyclerView.Adapter<StarterViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, position: Int): StarterViewHolder {
             return StarterViewHolder(
-                    LayoutInflater.from(parent.context)
-                            .inflate(R.layout.starter_list_item, parent, false)
+                LayoutInflater.from(parent.context)
+                    .inflate(R.layout.starter_list_item, parent, false)
             )
         }
 
@@ -88,9 +91,11 @@ class IntroActivity : AppCompatActivity() {
             holder.tvStarter.text = starters[position].body
             holder.tvStarterTitle.text = starters[position].title
             holder.ivImage.setImageDrawable(
-                    context.resources.getDrawable(starters[position].image), )
+                context.resources.getDrawable(starters[position].image),
+            )
             holder.container.setBackgroundColor(
-                    context.resources.getColor(starters[position].color))
+                context.resources.getColor(starters[position].color)
+            )
         }
 
         override fun getItemCount() = starters.size
