@@ -64,7 +64,7 @@
             app:layout_constraintEnd_toEndOf="@+id/container"
             app:layout_constraintStart_toEndOf="@+id/ivPicture"
             app:layout_constraintTop_toTopOf="@+id/container"
-            tools:text="@string/shoe_name" />
+            tools:text="@string/shoes_name" />
 
         <ScrollView
             android:layout_width="0dp"

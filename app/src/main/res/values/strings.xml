@@ -4,16 +4,16 @@
     <string name="skip">SKIP</string>
     <string name="msg_fill_all_fields">Fill all fields to login</string>
     <string name="msg_fill_all_fields_register">Fill all fields to register</string>
-    <string name="password">password</string>
-    <string name="email">email</string>
-    <string name="login">login</string>
+    <string name="user_password">Password</string>
+    <string name="user_email">Email</string>
+    <string name="user_login">Login</string>
     <string name="create_an_account">create an account</string>
-    <string name="description">description</string>
-    <string name="shoe_name">Shoes Name</string>
-    <string name="slide_title">Shoes name</string>
-    <string name="slide_desc">Shoes description</string>
-    <string name="name">name</string>
+    <string name="shoes_description">Shoes Description</string>
+    <string name="shoes_name">Shoes Name</string>
+    <string name="shoes_price">Shoes Price</string>
+    <string name="user_name">Name</string>
     <string name="register_user">Register User</string>
+    <string name="save_shoes">Save Shoes</string>
 
     <string name="large_text">
         THE HISTORY AND EVOLUTION OF SHOES
@@ -30,6 +30,4 @@
         WHEN DID THE FIRST SHOES APPEAR?
         1991 is an important date in the history of footwear because this is the year when, at the border of Austria and Italy, archeologists found a naturally mummified human named Oetzi from the Stone Age who died about 3300 years before our era. This Alpine traveler was wearing shoes made from deerskin with a sole made from bearskin and stuffed with hay. This is how it’s thought that the Stone Age footwear production technique was like: the fewer stitches, the dryer and warmer the legs, therefore, they wrinkled the leather. The stitches were small and they were not very reliable given the tools people had at that time.
     </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

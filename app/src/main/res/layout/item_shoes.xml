@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toStartOf="@+id/ivMoney"
         app:layout_constraintStart_toEndOf="@+id/ivPicture"
         app:layout_constraintTop_toTopOf="@+id/container"
-        tools:text="@string/shoe_name" />
+        tools:text="@string/shoes_name" />
 
     <TextView
         android:id="@+id/tvDescription"
@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="@+id/container"
         app:layout_constraintStart_toStartOf="@+id/tvName"
         app:layout_constraintTop_toBottomOf="@+id/tvName"
-        tools:text="@string/description" />
+        tools:text="@string/shoes_description" />
 
     <ImageView
         android:id="@+id/ivMoney"
