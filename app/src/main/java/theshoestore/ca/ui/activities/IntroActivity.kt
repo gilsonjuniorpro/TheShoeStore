@@ -1,11 +1,10 @@
-package theshoestore.ca.ui
+package theshoestore.ca.ui.activities
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +63,7 @@ class IntroActivity : AppCompatActivity() {
         return binding.viewPager.currentItem + i
     }
 
-    private fun gotToLogin(){
+    private fun gotToLogin() {
         mPrefManager.setFirstTimeLaunch(false)
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
@@ -73,7 +72,6 @@ class IntroActivity : AppCompatActivity() {
 
     private fun changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //val window: Window = window
             window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
@@ -81,7 +79,8 @@ class IntroActivity : AppCompatActivity() {
         }
     }
 
-    class StarterPagerAdapter(private val starters: Array<Starter.Item>, var context: Context) : RecyclerView.Adapter<StarterViewHolder>() {
+    class StarterPagerAdapter(private val starters: Array<Starter.Item>, var context: Context) :
+        RecyclerView.Adapter<StarterViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, position: Int): StarterViewHolder {
             return StarterViewHolder(
                 LayoutInflater.from(parent.context)
@@ -93,8 +92,10 @@ class IntroActivity : AppCompatActivity() {
             holder.tvStarter.text = starters[position].body
             holder.tvStarterTitle.text = starters[position].title
             holder.ivImage.setImageDrawable(
-                ResourcesCompat.getDrawable(context.resources,
-                    starters[position].image, null)
+                ResourcesCompat.getDrawable(
+                    context.resources,
+                    starters[position].image, null
+                )
             )
             holder.container.setBackgroundColor(
                 ContextCompat.getColor(context, starters[position].color)

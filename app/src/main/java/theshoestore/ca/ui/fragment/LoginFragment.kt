@@ -26,12 +26,12 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btLogin.setOnClickListener { view ->
-            login(view)
+        binding.btLogin.setOnClickListener { v ->
+            login(v)
         }
 
-        binding.tvRegister.setOnClickListener { view ->
-            goToRegister(view)
+        binding.tvRegister.setOnClickListener { v ->
+            goToRegister(v)
         }
     }
 
