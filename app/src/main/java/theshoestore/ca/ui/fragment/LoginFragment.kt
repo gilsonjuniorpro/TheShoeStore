@@ -1,9 +1,11 @@
 package theshoestore.ca.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.jarvis.ca.Mark
@@ -48,11 +50,18 @@ class LoginFragment : Fragment() {
 
         if(email.isNotEmpty() && password.isNotEmpty()){
             binding.progressBar.visibility = View.GONE
+            requireActivity().hideKeyboard(view)
             view.findNavController().navigate(
                 LoginFragmentDirections.actionLoginFragmentToListFragment(email, password))
         }else{
             binding.progressBar.visibility = View.GONE
             Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_all_fields))
+        }
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        (getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)?.apply {
+            hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }
