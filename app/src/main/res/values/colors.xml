@@ -7,26 +7,19 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
     <color name="colorPrice">#9C6C09</color>
-
     <color name="colorPrimary">#292929</color>
     <color name="colorPrimaryDark">#292929</color>
     <color name="colorAccent">#fdbe3b</color>
-
-    <!-- Screens background color-->
-    <color name="colorScreen1">#fdbe3b</color>
+    <color name="colorScreen1">#F8C150</color>
     <color name="colorScreen2">#e08e19</color>
     <color name="colorScreen3">#ff4842</color>
     <color name="colorScreen4">#f8591a</color>
-
     <color name="colorMediumGray" >#f3f3f3</color>
     <color name="colorBackgroundLayout">#312e37</color>
     <color name="colorEdittext">#fdbe3b</color>
     <color name="colorBackgroundCard">#23222a</color>
     <color name="colorBackgroundEdittext">#29292E</color>
     <color name="colorTextButton">#23222a</color>
-    <color name="colorTextCard">#ACACAC</color>
-    <color name="colorTextTime">#B3B3B5</color>
     <color name="colorBackgroundButton">#fdbe3b</color>
 </resources>

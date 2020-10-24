@@ -14,6 +14,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Theme.TheShoeStore.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.TheShoeStore.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="TitleTextStyle">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">30dp</item>
