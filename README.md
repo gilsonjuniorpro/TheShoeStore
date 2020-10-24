@@ -12,6 +12,8 @@ Shoe listing
 Shoe detail page
 
 ### 📷 How is this Project
+<img src="Screenshot_1603505879.png" width="15%"></img>
+<img src="Screenshot_1603505884.png" width="15%"></img>
 <img src="Screenshot_1603505889.png" width="15%"></img>
 <img src="Screenshot_1603505893.png" width="15%"></img>
 <img src="Screenshot_1603505900.png" width="15%"></img>
