@@ -39,7 +39,7 @@ If this project help you reduce time to develop, you can buy me a cup of coffee 
 
 ### License
 ```
-Copyright 2019 Coil Contributors
+Copyright 2020
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
