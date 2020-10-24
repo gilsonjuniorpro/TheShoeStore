@@ -21,6 +21,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginRight="16dp"
                 android:hint="@string/shoes_name"
                 android:importantForAutofill="yes"
@@ -69,10 +70,10 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:padding="15dp"
-                android:text="@string/register_user"
-                app:layout_constraintEnd_toEndOf="@+id/etPassword"
-                app:layout_constraintStart_toStartOf="@+id/etPassword"
-                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+                android:text="@string/save_shoes"
+                app:layout_constraintEnd_toEndOf="@+id/etDescription"
+                app:layout_constraintStart_toStartOf="@+id/etDescription"
+                app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -98,6 +99,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.40" />
+
+            <View
+                android:id="@+id/viewAdd"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/shape_background_add_picture"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/imageView" />
+
+            <ImageView
+                android:id="@+id/ivAddPicture"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintBottom_toBottomOf="@+id/viewAdd"
+                app:layout_constraintEnd_toEndOf="@+id/viewAdd"
+                app:layout_constraintStart_toStartOf="@+id/viewAdd"
+                app:layout_constraintTop_toTopOf="@+id/viewAdd"
+                android:contentDescription="@string/app_name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="shoesViewModel"
-            type="theshoestore.ca.viewmodel.ShoesViewModel" />
+            name="loginViewModel"
+            type="theshoestore.ca.viewmodel.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,12 +23,57 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="58dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/item_shoes"/>
+            tools:listitem="@layout/item_shoes" />
+
+        <LinearLayout
+            android:id="@+id/layoutQuickActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorQuickActionsBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/ivUserPicture"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="4dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_ondev_logo" />
+
+            <TextView
+                android:id="@+id/tvLogout"
+                style="@style/BodyTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="logout"
+                android:layout_marginStart="16dp"
+                android:drawableLeft="@drawable/ic_exit_to_app" />
+
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/ivAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:elevation="0dp"
+            app:srcCompat="@drawable/ic_add"
+            app:tint="@color/colorPrimaryDark"
+            android:backgroundTint="@color/colorAccent"
+            app:layout_constraintBottom_toTopOf="@+id/layoutQuickActions"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/layoutQuickActions"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

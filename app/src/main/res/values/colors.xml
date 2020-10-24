@@ -22,4 +22,6 @@
     <color name="colorBackgroundEdittext">#29292E</color>
     <color name="colorTextButton">#23222a</color>
     <color name="colorBackgroundButton">#fdbe3b</color>
+
+    <color name="colorQuickActionsBackground">#23222a</color>
 </resources>
