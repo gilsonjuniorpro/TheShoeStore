@@ -8,6 +8,8 @@
     <string name="msg_fill_price">Enter the price of Shoes</string>
     <string name="msg_fill_description">Enter the description of Shoes</string>
     <string name="msg_fake_image_added">Fake image of Shoes added</string>
+    <string name="msg_shoes_added_success">Shoes added successfully</string>
+    <string name="msg_user_added_success">User registered successfully</string>
     <string name="user_password">Password</string>
     <string name="user_email">Email</string>
     <string name="user_login">Login</string>

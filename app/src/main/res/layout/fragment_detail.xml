@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="detailViewModel"
+            type="theshoestore.ca.viewmodel.DetailViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,6 +67,7 @@
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
+            android:text="@{detailViewModel.shoes.title}"
             app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
             app:layout_constraintEnd_toEndOf="@+id/container"
             app:layout_constraintStart_toEndOf="@+id/ivPicture"
@@ -87,6 +95,7 @@
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/black"
                 android:textSize="15sp"
+                android:text="@{detailViewModel.shoes.description}"
                 tools:text="@string/large_text" />
         </ScrollView>
 
@@ -112,6 +121,7 @@
             android:fontFamily="@font/roboto"
             android:textColor="@color/white"
             android:textSize="30sp"
+            android:text="@{detailViewModel.shoes.price}"
             app:layout_constraintBottom_toTopOf="@+id/container"
             app:layout_constraintEnd_toEndOf="@+id/container"
             app:layout_constraintHorizontal_bias="0.0"
