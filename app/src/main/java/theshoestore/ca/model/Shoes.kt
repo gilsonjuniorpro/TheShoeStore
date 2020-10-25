@@ -10,9 +10,10 @@ import kotlinx.android.parcel.Parcelize
 class Shoes(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val title: String,
-    val description: String,
-    val price: String,
-    val picture: Int
+    val title: String?,
+    val description: String?,
+    val price: String?,
+    val picture: Int?
 ) : Parcelable {
+
 }
