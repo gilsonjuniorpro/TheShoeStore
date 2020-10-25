@@ -1,12 +1,14 @@
 package theshoestore.ca.ui.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.jarvis.ca.Mark
 import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentAddShoesBinding
@@ -101,6 +103,16 @@ class AddShoesFragment : Fragment() {
             )
 
             addShoesViewModel.saveShoes(shoes)
+            navigateToList()
         }
+    }
+
+    private fun navigateToList() {
+        Mark.showAlertSuccess(requireActivity(), getString(R.string.msg_shoes_added_success))
+        Handler().postDelayed({
+            binding.progressBar.visibility = View.GONE
+            findNavController().navigate(
+                AddShoesFragmentDirections.actionAddShoesFragmentToListFragment())
+        }, 2000L)
     }
 }

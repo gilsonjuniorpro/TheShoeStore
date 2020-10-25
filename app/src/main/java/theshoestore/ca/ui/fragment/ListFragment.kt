@@ -99,6 +99,9 @@ class ListFragment : Fragment() {
             description.text = shoes.description
             price.text = shoes.price
 
+            view.setOnClickListener{
+                openDetail(shoes)
+            }
             binding.recyclerShoes.addView(view)
         }
     }

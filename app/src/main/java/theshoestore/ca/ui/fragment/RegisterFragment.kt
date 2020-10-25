@@ -39,14 +39,19 @@ class RegisterFragment : Fragment() {
 
         if(name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()){
             binding.progressBar.visibility = View.VISIBLE
-            Handler().postDelayed({
-                binding.progressBar.visibility = View.GONE
-                findNavController().navigate(
-                    RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
-            }, 1000L)
+            navigateToLogin()
         }else{
             binding.progressBar.visibility = View.GONE
             Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_all_fields_register))
         }
+    }
+
+    private fun navigateToLogin() {
+        Mark.showAlertSuccess(requireActivity(), getString(R.string.msg_user_added_success))
+        Handler().postDelayed({
+            binding.progressBar.visibility = View.GONE
+            findNavController().navigate(
+                RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
+        }, 2000L)
     }
 }
