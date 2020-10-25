@@ -12,13 +12,13 @@
         android:layout_width="@dimen/img_width_height"
         android:layout_height="@dimen/img_width_height"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="16dp"
+        android:contentDescription="@string/app_name"
         android:src="@drawable/intro001"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/app_name" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvStarterTitle"
@@ -38,9 +38,9 @@
         style="@style/BodyTextStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="24dp"
         android:paddingLeft="@dimen/desc_padding"
         android:paddingRight="@dimen/desc_padding"
         android:text="@string/shoes_description"
