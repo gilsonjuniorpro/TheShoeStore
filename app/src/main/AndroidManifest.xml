@@ -13,9 +13,6 @@
         tools:ignore="LockedOrientationActivity">
 
         <activity android:name=".ui.activities.MainActivity"
-            android:screenOrientation="portrait" />
-
-        <activity android:name=".ui.activities.IntroActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

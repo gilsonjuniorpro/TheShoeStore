@@ -42,7 +42,7 @@ class RegisterFragment : Fragment() {
             Handler().postDelayed({
                 binding.progressBar.visibility = View.GONE
                 findNavController().navigate(
-                    RegisterFragmentDirections.actionLoginFragmentToRegisterFragment())
+                    RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
             }, 1000L)
         }else{
             binding.progressBar.visibility = View.GONE

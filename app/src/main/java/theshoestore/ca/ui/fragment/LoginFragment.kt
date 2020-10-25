@@ -7,20 +7,40 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import com.jarvis.ca.Mark
 import theshoestore.ca.R
+import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.databinding.FragmentLoginBinding
+import theshoestore.ca.viewmodel.ListViewModel
+import theshoestore.ca.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
 
     lateinit var binding: FragmentLoginBinding
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        binding.loginViewModel = viewModel
+
+        binding.lifecycleOwner = this
+
+        viewModel.isUserLoggedIn.observe(viewLifecycleOwner, { isLoggedIn ->
+            if (isLoggedIn) {
+                findNavController(this).navigate(
+                    LoginFragmentDirections.actionLoginFragmentToOnBoardingFragment())
+            }
+        })
 
         return binding.root
     }
@@ -39,7 +59,13 @@ class LoginFragment : Fragment() {
 
     private fun goToRegister(view: View) {
         view.findNavController().navigate(
-            RegisterFragmentDirections.actionLoginFragmentToRegisterFragment())
+            LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
+    }
+
+    private fun goToOnBoarding(view: View) {
+        view.findNavController().navigate(
+            LoginFragmentDirections.actionLoginFragmentToOnBoardingFragment())
+        viewModel.setUserLoggedIn()
     }
 
     private fun login(view: View) {
@@ -51,8 +77,8 @@ class LoginFragment : Fragment() {
         if(email.isNotEmpty() && password.isNotEmpty()){
             binding.progressBar.visibility = View.GONE
             requireActivity().hideKeyboard(view)
-            view.findNavController().navigate(
-                LoginFragmentDirections.actionLoginFragmentToListFragment(email, password))
+            goToOnBoarding(view)
+            viewModel.setUserLoggedIn()
         }else{
             binding.progressBar.visibility = View.GONE
             Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_all_fields))

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,14 +12,12 @@ import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.ui.adapter.ShoesAdapter
 import theshoestore.ca.util.Util
-import theshoestore.ca.viewmodel.ShoesViewModel
-import theshoestore.ca.viewmodel.ShoesViewModelFactory
+import theshoestore.ca.viewmodel.LoginViewModel
 
 class ListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
-    private lateinit var viewModel: ShoesViewModel
-    private lateinit var viewModelFactory: ShoesViewModelFactory
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,20 +25,19 @@ class ListFragment : Fragment() {
     ): View? {
         binding = FragmentListBinding.inflate(inflater, container, false)
 
-        viewModelFactory = ShoesViewModelFactory()
-        viewModel = ViewModelProvider(this, viewModelFactory)
-                .get(ShoesViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        binding.shoesViewModel = viewModel
+        binding.loginViewModel = viewModel
 
         binding.lifecycleOwner = this
 
-        /*viewModel.isUserLoggedIn.observe(this, Observer { isLogged ->
-            if (isLogged) {
-                findNavController().navigate(ListFragmentDirections.actionListFragmentToDetailFragment())
-                //viewModel.onPlayAgainComplete()
+        viewModel.isUserLoggedIn.observe(viewLifecycleOwner, { isLoggedIn ->
+            if (!isLoggedIn) {
+                findNavController().navigate(
+                    ListFragmentDirections.actionListFragmentToLoginFragment()
+                )
             }
-        })*/
+        })
 
         return binding.root
     }
@@ -50,6 +46,14 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setRecyclerView()
+
+        binding.ivAdd.setOnClickListener{
+            openAddShoes()
+        }
+
+        binding.tvLogout.setOnClickListener{
+            viewModel.setUserNotLoggedIn()
+        }
     }
 
     private fun setRecyclerView() {
@@ -62,5 +66,10 @@ class ListFragment : Fragment() {
     fun openDetail(shoe: Shoes){
         findNavController().navigate(
             ListFragmentDirections.actionListFragmentToDetailFragment(shoe))
+    }
+
+    fun openAddShoes(){
+        findNavController().navigate(
+            ListFragmentDirections.actionListFragmentToAddShoesFragment())
     }
 }
