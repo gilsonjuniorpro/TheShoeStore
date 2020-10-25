@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.model.Shoes
+import theshoestore.ca.repository.ShoesRepository
 import theshoestore.ca.ui.adapter.ShoesAdapter
 import theshoestore.ca.viewmodel.ListViewModel
 import theshoestore.ca.viewmodel.ListViewModelFactory
@@ -17,13 +18,12 @@ import theshoestore.ca.viewmodel.LoginViewModel
 
 class ListFragment : Fragment() {
 
-
     private lateinit var binding: FragmentListBinding
     private lateinit var viewModel: LoginViewModel
     private lateinit var listViewModel: ListViewModel
     private lateinit var listViewModelFactory: ListViewModelFactory
 
-    private var items: MutableList<Shoes> = mutableListOf()
+    private var items: List<Shoes> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +33,7 @@ class ListFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        listViewModelFactory = ListViewModelFactory(items)
+        listViewModelFactory = ListViewModelFactory(ShoesRepository(requireContext()), requireContext())
         listViewModel = ViewModelProvider(this, listViewModelFactory)
             .get(ListViewModel::class.java)
 
@@ -49,12 +49,18 @@ class ListFragment : Fragment() {
             }
         })
 
-        listViewModel.listShoes.observe(viewLifecycleOwner, { list ->
+        listViewModel.allShoes.observe(viewLifecycleOwner, { list ->
             items = list
-            setRecyclerView()
+            val adapter = ShoesAdapter(items, this::openDetail)
+            binding.recyclerShoes.adapter = adapter
         })
 
-        //shoesViewModel.listAllShoes()
+        listViewModel.isPopulated.observe(viewLifecycleOwner, { isPopulated ->
+            if(!isPopulated){
+                listViewModel.insertListShoes()
+                listViewModel.setPopulated()
+            }
+        })
 
         return binding.root
     }
@@ -62,7 +68,7 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //setRecyclerView()
+        setRecyclerView()
 
         binding.ivAdd.setOnClickListener{
             openAddShoes()
@@ -75,8 +81,7 @@ class ListFragment : Fragment() {
 
     private fun setRecyclerView() {
         binding.recyclerShoes.layoutManager = LinearLayoutManager(requireContext())
-        val adapter = ShoesAdapter(items, this::openDetail)
-        binding.recyclerShoes.adapter = adapter
+
     }
 
     private fun openDetail(shoe: Shoes){

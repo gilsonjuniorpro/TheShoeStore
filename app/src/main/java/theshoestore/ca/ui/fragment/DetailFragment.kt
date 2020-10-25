@@ -30,7 +30,7 @@ class DetailFragment : Fragment() {
         binding.tvDescription.text = args.shoe.description
         binding.tvPrice.text = args.shoe.price
         binding.ivPicture.setImageDrawable(
-            ResourcesCompat.getDrawable(resources, args.shoe.picture, null)
+            args.shoe.picture?.let { ResourcesCompat.getDrawable(resources, it, null) }
         )
     }
 }

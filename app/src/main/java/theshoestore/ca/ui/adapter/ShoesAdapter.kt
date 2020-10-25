@@ -38,7 +38,7 @@ class ShoesAdapter(
         holder.tvDescription.text = shoe.description
         holder.tvPrice.text = shoe.price
         holder.ivPicture.setImageDrawable(
-            ResourcesCompat.getDrawable(context!!.resources, shoe.picture, null)
+            ResourcesCompat.getDrawable(context!!.resources, shoe.picture!!, null)
         )
 
         holder.itemView.setOnClickListener{ onItemClick(shoe) }

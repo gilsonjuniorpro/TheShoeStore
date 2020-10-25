@@ -25,7 +25,7 @@ class ShoesRepository(context: Context) {
         return shoesDao.getAllShoes()
     }
 
-    fun search(id: Int): Shoes {
+    fun getShoes(id: Int): Shoes {
         return shoesDao.getShoes(id)
     }
 }

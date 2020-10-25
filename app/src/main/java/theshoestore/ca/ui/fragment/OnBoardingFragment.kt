@@ -33,7 +33,6 @@ class OnBoardingFragment : Fragment() {
 
     private lateinit var binding: FragmentOnBoardingBinding
     private lateinit var viewModel: OnBoardingViewModel
-    private lateinit var mPrefManager: PrefManager
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

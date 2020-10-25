@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import theshoestore.ca.databinding.FragmentAddShoesBinding
 import theshoestore.ca.model.Shoes
+import theshoestore.ca.repository.ShoesRepository
 import theshoestore.ca.util.Util
 import theshoestore.ca.viewmodel.AddShoesViewModel
 import theshoestore.ca.viewmodel.AddShoesViewModelFactory
@@ -17,7 +18,6 @@ class AddShoesFragment : Fragment() {
     private lateinit var binding: FragmentAddShoesBinding
     private lateinit var addShoesViewModel: AddShoesViewModel
     private lateinit var addShoesViewModelFactory: AddShoesViewModelFactory
-    private lateinit var items: MutableList<Shoes>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +25,8 @@ class AddShoesFragment : Fragment() {
     ): View? {
         binding = FragmentAddShoesBinding.inflate(inflater, container, false)
 
-        addShoesViewModelFactory = AddShoesViewModelFactory(items)
+        addShoesViewModelFactory = AddShoesViewModelFactory(
+            ShoesRepository(requireContext()), requireContext())
         addShoesViewModel = ViewModelProvider(this, addShoesViewModelFactory)
             .get(AddShoesViewModel::class.java)
 
@@ -46,10 +47,11 @@ class AddShoesFragment : Fragment() {
 
     private fun saveShoes(){
         val shoes = Shoes(
-            "test",
-            "test",
-            "$109.00",
-            Util.getImage()
+            0,
+            title = "test",
+            description = "test",
+            price = "$109.00",
+            picture = Util.getImage()
         )
 
         addShoesViewModel.saveShoes(shoes)
