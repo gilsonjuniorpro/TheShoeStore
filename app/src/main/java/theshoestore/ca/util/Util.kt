@@ -2,10 +2,11 @@ package theshoestore.ca.util
 
 import theshoestore.ca.R
 import theshoestore.ca.model.Shoes
+import kotlin.random.Random
 
 object Util {
-    fun getListOfShoes(): List<Shoes> {
-        return listOf(
+    fun getListOfShoes(): MutableList<Shoes> {
+        return mutableListOf(
             Shoes(
                 "New Balance 696v4",
                 "THE HISTORY AND EVOLUTION OF SHOES\n" +
@@ -267,5 +268,28 @@ object Util {
                 R.drawable.shoe05
             )
         )
+    }
+
+    fun getImage(): Int{
+        val img: Int = (1..5).random()
+
+        return when (img) {
+            1 -> {
+                R.drawable.shoe01
+            }
+            2 -> {
+                R.drawable.shoe02
+            }
+            3 -> {
+                R.drawable.shoe03
+            }
+            4 -> {
+                R.drawable.shoe04
+            }
+            else -> {
+                R.drawable.shoe05
+            }
+        }
+
     }
 }

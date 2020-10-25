@@ -11,13 +11,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.ui.adapter.ShoesAdapter
-import theshoestore.ca.util.Util
+import theshoestore.ca.viewmodel.ListViewModel
+import theshoestore.ca.viewmodel.ListViewModelFactory
 import theshoestore.ca.viewmodel.LoginViewModel
 
 class ListFragment : Fragment() {
 
+
     private lateinit var binding: FragmentListBinding
     private lateinit var viewModel: LoginViewModel
+    private lateinit var listViewModel: ListViewModel
+    private lateinit var listViewModelFactory: ListViewModelFactory
+
+    private var items: MutableList<Shoes> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +33,11 @@ class ListFragment : Fragment() {
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        binding.loginViewModel = viewModel
+        listViewModelFactory = ListViewModelFactory(items)
+        listViewModel = ViewModelProvider(this, listViewModelFactory)
+            .get(ListViewModel::class.java)
+
+        binding.listViewModel = listViewModel
 
         binding.lifecycleOwner = this
 
@@ -39,13 +49,20 @@ class ListFragment : Fragment() {
             }
         })
 
+        listViewModel.listShoes.observe(viewLifecycleOwner, { list ->
+            items = list
+            setRecyclerView()
+        })
+
+        //shoesViewModel.listAllShoes()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setRecyclerView()
+        //setRecyclerView()
 
         binding.ivAdd.setOnClickListener{
             openAddShoes()
@@ -57,18 +74,17 @@ class ListFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        val items: List<Shoes> = Util.getListOfShoes()
         binding.recyclerShoes.layoutManager = LinearLayoutManager(requireContext())
         val adapter = ShoesAdapter(items, this::openDetail)
         binding.recyclerShoes.adapter = adapter
     }
 
-    fun openDetail(shoe: Shoes){
+    private fun openDetail(shoe: Shoes){
         findNavController().navigate(
             ListFragmentDirections.actionListFragmentToDetailFragment(shoe))
     }
 
-    fun openAddShoes(){
+    private fun openAddShoes(){
         findNavController().navigate(
             ListFragmentDirections.actionListFragmentToAddShoesFragment())
     }
