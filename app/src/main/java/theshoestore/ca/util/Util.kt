@@ -286,25 +286,12 @@ object Util {
     }
 
     fun getImage(): Int{
-        val img: Int = (1..5).random()
-
-        return when (img) {
-            1 -> {
-                R.drawable.shoe01
-            }
-            2 -> {
-                R.drawable.shoe02
-            }
-            3 -> {
-                R.drawable.shoe03
-            }
-            4 -> {
-                R.drawable.shoe04
-            }
-            else -> {
-                R.drawable.shoe05
-            }
+        return when ((1..5).random()) {
+            1 -> R.drawable.shoe01
+            2 -> R.drawable.shoe02
+            3 -> R.drawable.shoe03
+            4 -> R.drawable.shoe04
+            else -> R.drawable.shoe05
         }
-
     }
 }
