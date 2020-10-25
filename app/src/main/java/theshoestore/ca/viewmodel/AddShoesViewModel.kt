@@ -1,39 +1,27 @@
 package theshoestore.ca.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import theshoestore.ca.model.Shoes
+import theshoestore.ca.repository.ShoesRepository
 import theshoestore.ca.util.Util
 
-class AddShoesViewModel(private var list: MutableList<Shoes>) : ViewModel() {
-    private val _listShoes = MutableLiveData<MutableList<Shoes>>()
-    val listShoes: LiveData<MutableList<Shoes>>
-        get() = _listShoes
+class AddShoesViewModel(
+    private val repository: ShoesRepository,
+    private val context: Context
+) : ViewModel() {
 
-    private var _isPopulated : Boolean = false
-    val isPopulated: Boolean
-        get() = _isPopulated
-
-    private var listOfShoes = mutableListOf<Shoes>()
-
-    init {
-        if(isPopulated){
-            _listShoes.value = listOfShoes
-        }else{
-            listOfShoes.addAll(Util.getListOfShoes())
-            _listShoes.value = Util.getListOfShoes()
-            _isPopulated = true
+    fun saveShoes(shoes: Shoes){
+        viewModelScope.launch{
+            withContext(Dispatchers.IO){
+                repository.saveShoes(shoes)
+            }
         }
-    }
-
-    fun saveShoes(shoes: Shoes) {
-        listOfShoes.add(shoes)
-        _listShoes.value = listOfShoes
-    }
-
-    fun setList(list: MutableList<Shoes>){
-        listOfShoes = list
-        _listShoes.value = list
     }
 }

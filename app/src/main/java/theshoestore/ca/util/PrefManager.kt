@@ -14,6 +14,8 @@ class PrefManager(context: Context?) {
 
     private val IS_FIRST_TIME_LAUNCH = "IsFirstTimeLaunch"
 
+    private val IS_POPULATED = "IsPopulated"
+
     init {
         pref = context!!.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
         editor = pref?.edit()
@@ -26,5 +28,14 @@ class PrefManager(context: Context?) {
 
     fun isFirstTimeLaunch(): Boolean {
         return pref!!.getBoolean(IS_FIRST_TIME_LAUNCH, true)
+    }
+
+    fun setPopulated(isPopulated: Boolean) {
+        editor!!.putBoolean(IS_POPULATED, isPopulated)
+        editor!!.commit()
+    }
+
+    fun isPopulated(): Boolean {
+        return pref!!.getBoolean(IS_POPULATED, false)
     }
 }
