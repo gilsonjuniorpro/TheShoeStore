@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="loginViewModel"
-            type="theshoestore.ca.viewmodel.LoginViewModel" />
+            name="listViewModel"
+            type="theshoestore.ca.viewmodel.ListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

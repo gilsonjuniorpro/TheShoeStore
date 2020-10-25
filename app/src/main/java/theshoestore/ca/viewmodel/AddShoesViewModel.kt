@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.util.Util
 
-class ListViewModel(private var list: MutableList<Shoes>) : ViewModel() {
-    private val _list = MutableLiveData<MutableList<Shoes>>()
+class AddShoesViewModel(private var list: MutableList<Shoes>) : ViewModel() {
+    private val _listShoes = MutableLiveData<MutableList<Shoes>>()
     val listShoes: LiveData<MutableList<Shoes>>
-        get() = _list
+        get() = _listShoes
 
     private var _isPopulated : Boolean = false
     val isPopulated: Boolean
@@ -19,21 +19,21 @@ class ListViewModel(private var list: MutableList<Shoes>) : ViewModel() {
 
     init {
         if(isPopulated){
-            _list.value = listOfShoes
+            _listShoes.value = listOfShoes
         }else{
             listOfShoes.addAll(Util.getListOfShoes())
-            _list.value = Util.getListOfShoes()
+            _listShoes.value = Util.getListOfShoes()
             _isPopulated = true
         }
     }
 
     fun saveShoes(shoes: Shoes) {
         listOfShoes.add(shoes)
-        _list.value = listOfShoes
+        _listShoes.value = listOfShoes
     }
 
     fun setList(list: MutableList<Shoes>){
         listOfShoes = list
-        _list.value = list
+        _listShoes.value = list
     }
 }
