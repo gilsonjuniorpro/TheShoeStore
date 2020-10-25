@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
+import com.jarvis.ca.Mark
+import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentAddShoesBinding
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.repository.ShoesRepository
@@ -18,6 +21,7 @@ class AddShoesFragment : Fragment() {
     private lateinit var binding: FragmentAddShoesBinding
     private lateinit var addShoesViewModel: AddShoesViewModel
     private lateinit var addShoesViewModelFactory: AddShoesViewModelFactory
+    private var fakeImage: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,17 +47,60 @@ class AddShoesFragment : Fragment() {
         binding.btRegister.setOnClickListener{
             saveShoes()
         }
+
+        binding.ivAddPicture.setOnClickListener{
+            addFakeShoes()
+        }
+    }
+
+    private fun addFakeShoes() {
+        fakeImage = Util.getImage()
+
+        binding.ivSample.setImageDrawable(
+            ResourcesCompat.getDrawable(
+                resources,
+                fakeImage, null
+            )
+        )
+
+        Mark.showAlertSuccess(requireActivity(), getString(R.string.msg_fake_image_added))
+    }
+
+    private fun validateFields() : Boolean{
+        return when {
+            binding.etTitle.text.isNullOrEmpty() -> {
+                Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_name))
+                false
+            }
+            binding.etPrice.text.isNullOrEmpty() -> {
+                Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_price))
+                false
+            }
+            binding.etDescription.text.isNullOrEmpty() -> {
+                Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_description))
+                false
+            }
+            else -> {
+                true
+            }
+        }
     }
 
     private fun saveShoes(){
-        val shoes = Shoes(
-            0,
-            title = "test",
-            description = "test",
-            price = "$109.00",
-            picture = Util.getImage()
-        )
+        if(validateFields()){
+            var shoesName: String = binding.etTitle.text.toString()
+            var shoesPrice: String = binding.etPrice.text.toString()
+            var shoesDescription: String = binding.etDescription.text.toString()
 
-        addShoesViewModel.saveShoes(shoes)
+            val shoes = Shoes(
+                0,
+                shoesName,
+                shoesDescription,
+                shoesPrice,
+                fakeImage
+            )
+
+            addShoesViewModel.saveShoes(shoes)
+        }
     }
 }

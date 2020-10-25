@@ -35,7 +35,7 @@
                 android:inputType="text"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/ivSample"
                 tools:ignore="Autofill" />
 
             <EditText
@@ -83,7 +83,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/ivSample"
                 android:layout_width="180dp"
                 android:layout_height="180dp"
                 android:layout_marginStart="60dp"
@@ -93,7 +93,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_logo" />
+                app:srcCompat="@drawable/shoes_sample" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -109,25 +109,25 @@
 
             <View
                 android:id="@+id/viewAdd"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginBottom="16dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/shape_background_add_picture"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toEndOf="@+id/imageView" />
+                app:layout_constraintBottom_toBottomOf="@+id/ivSample"
+                app:layout_constraintEnd_toEndOf="@+id/ivSample"
+                app:layout_constraintStart_toEndOf="@+id/ivSample" />
 
             <ImageView
                 android:id="@+id/ivAddPicture"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/app_name"
                 android:padding="4dp"
                 android:src="@drawable/ic_camera"
                 app:layout_constraintBottom_toBottomOf="@+id/viewAdd"
                 app:layout_constraintEnd_toEndOf="@+id/viewAdd"
                 app:layout_constraintStart_toStartOf="@+id/viewAdd"
-                app:layout_constraintTop_toTopOf="@+id/viewAdd"
-                android:contentDescription="@string/app_name" />
+                app:layout_constraintTop_toTopOf="@+id/viewAdd" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

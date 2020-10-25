@@ -4,17 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.repository.ShoesRepository
-import theshoestore.ca.ui.adapter.ShoesAdapter
 import theshoestore.ca.viewmodel.ListViewModel
 import theshoestore.ca.viewmodel.ListViewModelFactory
 import theshoestore.ca.viewmodel.LoginViewModel
+
 
 class ListFragment : Fragment() {
 
@@ -26,8 +29,8 @@ class ListFragment : Fragment() {
     private var items: List<Shoes> = listOf()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListBinding.inflate(inflater, container, false)
 
@@ -44,19 +47,18 @@ class ListFragment : Fragment() {
         viewModel.isUserLoggedIn.observe(viewLifecycleOwner, { isLoggedIn ->
             if (!isLoggedIn) {
                 findNavController().navigate(
-                    ListFragmentDirections.actionListFragmentToLoginFragment()
+                        ListFragmentDirections.actionListFragmentToLoginFragment()
                 )
             }
         })
 
         listViewModel.allShoes.observe(viewLifecycleOwner, { list ->
-            items = list
-            val adapter = ShoesAdapter(items, this::openDetail)
-            binding.recyclerShoes.adapter = adapter
+            //items = list
+            setView(list)
         })
 
         listViewModel.isPopulated.observe(viewLifecycleOwner, { isPopulated ->
-            if(!isPopulated){
+            if (!isPopulated) {
                 listViewModel.insertListShoes()
                 listViewModel.setPopulated()
             }
@@ -68,8 +70,6 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setRecyclerView()
-
         binding.ivAdd.setOnClickListener{
             openAddShoes()
         }
@@ -79,18 +79,37 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun setRecyclerView() {
-        binding.recyclerShoes.layoutManager = LinearLayoutManager(requireContext())
+    private fun setView(list: List<Shoes>) {
+        //val adapter = ShoesAdapter(items, this::openDetail)
+        var inflater : LayoutInflater = LayoutInflater.from(requireContext())
+        list.forEach { shoes ->
+            var view: View = inflater.inflate(R.layout.item_shoes, binding.recyclerShoes, false)
+            var picture: ImageView = view.findViewById(R.id.ivPicture)
+            var title: TextView = view.findViewById(R.id.tvName)
+            var description: TextView = view.findViewById(R.id.tvDescription)
+            var price: TextView = view.findViewById(R.id.tvPrice)
 
+            picture.setImageDrawable(
+                ResourcesCompat.getDrawable(
+                    resources,
+                    shoes.picture, null
+                )
+            )
+            title.text = shoes.title
+            description.text = shoes.description
+            price.text = shoes.price
+
+            binding.recyclerShoes.addView(view)
+        }
     }
 
     private fun openDetail(shoe: Shoes){
         findNavController().navigate(
-            ListFragmentDirections.actionListFragmentToDetailFragment(shoe))
+                ListFragmentDirections.actionListFragmentToDetailFragment(shoe))
     }
 
     private fun openAddShoes(){
         findNavController().navigate(
-            ListFragmentDirections.actionListFragmentToAddShoesFragment())
+                ListFragmentDirections.actionListFragmentToAddShoesFragment())
     }
 }

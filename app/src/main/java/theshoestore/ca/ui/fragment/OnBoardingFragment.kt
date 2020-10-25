@@ -1,15 +1,11 @@
 package theshoestore.ca.ui.fragment
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -20,13 +16,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import theshoestore.ca.R
-import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.databinding.FragmentOnBoardingBinding
 import theshoestore.ca.model.Starter
-import theshoestore.ca.ui.activities.IntroActivity
-import theshoestore.ca.ui.activities.MainActivity
-import theshoestore.ca.util.PrefManager
-import theshoestore.ca.viewmodel.LoginViewModel
 import theshoestore.ca.viewmodel.OnBoardingViewModel
 
 class OnBoardingFragment : Fragment() {
