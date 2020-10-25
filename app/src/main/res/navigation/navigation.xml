@@ -17,18 +17,7 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             app:popUpTo="@+id/loginFragment"
-            app:popUpToInclusive="true"/>
-        />
-        <action
-            android:id="@+id/action_loginFragment_to_listFragment"
-            app:destination="@id/listFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"
-            app:popUpTo="@+id/loginFragment"
-            app:popUpToInclusive="true"/>
-        />
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
             app:destination="@id/registerFragment"
@@ -44,7 +33,7 @@
         android:label="Register Fragment"
         tools:layout="@layout/fragment_register">
         <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
+            android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
@@ -59,12 +48,6 @@
         android:name="theshoestore.ca.ui.fragment.ListFragment"
         android:label="List Fragment"
         tools:layout="@layout/fragment_list">
-        <argument
-            android:name="email"
-            app:argType="string" />
-        <argument
-            android:name="password"
-            app:argType="string" />
         <action
             android:id="@+id/action_listFragment_to_detailFragment"
             app:destination="@id/detailFragment"
@@ -75,6 +58,13 @@
         <action
             android:id="@+id/action_listFragment_to_addShoesFragment"
             app:destination="@id/addShoesFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_listFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in_left"
@@ -96,7 +86,7 @@
             app:exitAnim="@anim/slide_in_right"
             app:popEnterAnim="@anim/slide_out_right"
             app:popExitAnim="@anim/slide_in_left"
-            app:popUpTo="@+id/listFragment"/>
+            app:popUpTo="@+id/detailFragment"/>
     </fragment>
     <fragment
         android:id="@+id/onBoardingFragment"

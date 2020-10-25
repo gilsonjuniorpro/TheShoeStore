@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="loginViewModel"
-            type="theshoestore.ca.viewmodel.LoginViewModel" />
+            name="onBoardingViewModel"
+            type="theshoestore.ca.viewmodel.OnBoardingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
