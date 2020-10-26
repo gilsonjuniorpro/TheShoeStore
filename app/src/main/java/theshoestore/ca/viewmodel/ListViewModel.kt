@@ -1,11 +1,8 @@
 package theshoestore.ca.viewmodel
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.repository.ShoesRepository
 import theshoestore.ca.util.PrefManager
@@ -38,43 +35,33 @@ class ListViewModel(
 
     fun saveShoes(shoes: Shoes){
         viewModelScope.launch{
-            withContext(Dispatchers.IO){
-                repository.saveShoes(shoes)
-            }
+            repository.saveShoes(shoes)
         }
     }
 
     fun updateShoes(shoes: Shoes){
         viewModelScope.launch{
-            withContext(Dispatchers.IO){
-                repository.updateShoes(shoes)
-            }
+            repository.updateShoes(shoes)
         }
     }
 
     fun deleteShoes(shoes: Shoes){
         viewModelScope.launch{
-            withContext(Dispatchers.IO){
-                repository.deleteShoes(shoes)
-            }
+            repository.deleteShoes(shoes)
         }
     }
 
     fun getShoes(id: Int) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                _shoes.postValue(repository.getShoes(id))
-            }
+            _shoes.postValue(repository.getShoes(id))
         }
     }
 
     fun insertListShoes(){
         viewModelScope.launch{
-            withContext(Dispatchers.IO){
-                val list = Util.getListOfShoes()
-                list.forEach{ shoes ->
-                    repository.saveShoes(shoes)
-                }
+            val list = Util.getListOfShoes()
+            list.forEach{ shoes ->
+                repository.saveShoes(shoes)
             }
         }
     }
