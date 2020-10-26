@@ -1,12 +1,17 @@
 package theshoestore.ca.ui.fragment
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -25,8 +30,6 @@ class ListFragment : Fragment() {
     private lateinit var viewModel: LoginViewModel
     private lateinit var listViewModel: ListViewModel
     private lateinit var listViewModelFactory: ListViewModelFactory
-
-    private var items: List<Shoes> = listOf()
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +56,6 @@ class ListFragment : Fragment() {
         })
 
         listViewModel.allShoes.observe(viewLifecycleOwner, { list ->
-            //items = list
             setView(list)
         })
 
@@ -80,14 +82,13 @@ class ListFragment : Fragment() {
     }
 
     private fun setView(list: List<Shoes>) {
-        //val adapter = ShoesAdapter(items, this::openDetail)
-        var inflater : LayoutInflater = LayoutInflater.from(requireContext())
+        val inflater : LayoutInflater = LayoutInflater.from(requireContext())
         list.forEach { shoes ->
-            var view: View = inflater.inflate(R.layout.item_shoes, binding.recyclerShoes, false)
-            var picture: ImageView = view.findViewById(R.id.ivPicture)
-            var title: TextView = view.findViewById(R.id.tvName)
-            var description: TextView = view.findViewById(R.id.tvDescription)
-            var price: TextView = view.findViewById(R.id.tvPrice)
+            val view: View = inflater.inflate(R.layout.item_shoes, binding.recyclerShoes, false)
+            val picture: ImageView = view.findViewById(R.id.ivPicture)
+            val title: TextView = view.findViewById(R.id.tvName)
+            val description: TextView = view.findViewById(R.id.tvDescription)
+            val price: TextView = view.findViewById(R.id.tvPrice)
 
             picture.setImageDrawable(
                 ResourcesCompat.getDrawable(

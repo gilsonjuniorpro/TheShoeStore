@@ -10,12 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
 import com.jarvis.ca.Mark
 import theshoestore.ca.R
-import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.databinding.FragmentLoginBinding
-import theshoestore.ca.viewmodel.ListViewModel
 import theshoestore.ca.viewmodel.LoginViewModel
 
 class LoginFragment : Fragment() {
@@ -37,8 +34,8 @@ class LoginFragment : Fragment() {
 
         viewModel.isUserLoggedIn.observe(viewLifecycleOwner, { isLoggedIn ->
             if (isLoggedIn) {
-                findNavController(this).navigate(
-                    LoginFragmentDirections.actionLoginFragmentToOnBoardingFragment())
+                val action = LoginFragmentDirections.actionLoginFragmentToOnBoardingFragment()
+                findNavController(this).navigate(action)
             }
         })
 

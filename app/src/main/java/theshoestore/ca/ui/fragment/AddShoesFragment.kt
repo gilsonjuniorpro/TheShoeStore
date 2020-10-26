@@ -90,9 +90,9 @@ class AddShoesFragment : Fragment() {
 
     private fun saveShoes(){
         if(validateFields()){
-            var shoesName: String = binding.etTitle.text.toString()
-            var shoesPrice: String = binding.etPrice.text.toString()
-            var shoesDescription: String = binding.etDescription.text.toString()
+            val shoesName: String = binding.etTitle.text.toString()
+            val shoesPrice: String = binding.etPrice.text.toString()
+            val shoesDescription: String = binding.etDescription.text.toString()
 
             val shoes = Shoes(
                 0,

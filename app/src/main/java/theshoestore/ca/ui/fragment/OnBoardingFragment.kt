@@ -1,16 +1,19 @@
 package theshoestore.ca.ui.fragment
 
 import android.content.Context
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -25,8 +28,10 @@ class OnBoardingFragment : Fragment() {
     private lateinit var binding: FragmentOnBoardingBinding
     private lateinit var viewModel: OnBoardingViewModel
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         binding = FragmentOnBoardingBinding.inflate(inflater, container, false)
 
@@ -43,8 +48,6 @@ class OnBoardingFragment : Fragment() {
         })
 
         viewModel.isItTheFirstTime()
-
-        changeStatusBarColor()
 
         binding.viewPager.adapter = StarterPagerAdapter(Starter.starters, requireContext())
         binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -73,15 +76,6 @@ class OnBoardingFragment : Fragment() {
         findNavController().navigate(
             OnBoardingFragmentDirections.actionOnBoardingFragmentToListFragment()
         )
-    }
-
-    private fun changeStatusBarColor() {
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-            window.statusBarColor = Color.TRANSPARENT
-        }*/
     }
 
     class StarterPagerAdapter(private val starters: Array<Starter.Item>, var context: Context) :
