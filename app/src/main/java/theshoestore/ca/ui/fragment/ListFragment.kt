@@ -17,14 +17,17 @@ import theshoestore.ca.repository.ShoesRepository
 import theshoestore.ca.viewmodel.ListViewModel
 import theshoestore.ca.viewmodel.ListViewModelFactory
 import theshoestore.ca.viewmodel.LoginViewModel
+import theshoestore.ca.viewmodel.LoginViewModelFactory
 
 
 class ListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
-    private lateinit var viewModel: LoginViewModel
+    //private lateinit var viewModel: LoginViewModel
     private lateinit var listViewModel: ListViewModel
     private lateinit var listViewModelFactory: ListViewModelFactory
+    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var loginViewModelFactory: LoginViewModelFactory
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -32,17 +35,21 @@ class ListFragment : Fragment() {
     ): View? {
         binding = FragmentListBinding.inflate(inflater, container, false)
 
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        //viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         listViewModelFactory = ListViewModelFactory(ShoesRepository(requireContext()), requireContext())
         listViewModel = ViewModelProvider(this, listViewModelFactory)
             .get(ListViewModel::class.java)
 
+        loginViewModelFactory = LoginViewModelFactory(requireContext())
+        loginViewModel = ViewModelProvider(this, loginViewModelFactory)
+            .get(LoginViewModel::class.java)
+
         binding.listViewModel = listViewModel
 
         binding.lifecycleOwner = this
 
-        viewModel.isUserLoggedIn.observe(viewLifecycleOwner, { isLoggedIn ->
+        loginViewModel.isUserLoggedIn.observe(viewLifecycleOwner, { isLoggedIn ->
             if (!isLoggedIn) {
                 findNavController().navigate(
                         ListFragmentDirections.actionListFragmentToLoginFragment()
@@ -72,7 +79,7 @@ class ListFragment : Fragment() {
         }
 
         binding.tvLogout.setOnClickListener{
-            viewModel.setUserNotLoggedIn()
+            loginViewModel.setUserNotLoggedIn()
         }
     }
 

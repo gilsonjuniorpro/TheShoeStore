@@ -16,6 +16,8 @@ class PrefManager(context: Context?) {
 
     private val IS_POPULATED = "IsPopulated"
 
+    private val IS_LOGGEDIN = "isLoggedIn"
+
     init {
         pref = context!!.getSharedPreferences(PREF_NAME, PRIVATE_MODE)
         editor = pref?.edit()
@@ -37,5 +39,14 @@ class PrefManager(context: Context?) {
 
     fun isPopulated(): Boolean {
         return pref!!.getBoolean(IS_POPULATED, false)
+    }
+
+    fun setLoggedIn(isLoggedIn: Boolean) {
+        editor!!.putBoolean(IS_LOGGEDIN, isLoggedIn)
+        editor!!.commit()
+    }
+
+    fun isLoggedIn(): Boolean {
+        return pref!!.getBoolean(IS_LOGGEDIN, false)
     }
 }

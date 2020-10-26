@@ -13,7 +13,7 @@ import theshoestore.ca.util.Util
 
 class ListViewModel(
     private val repository: ShoesRepository,
-    private val context: Context
+    context: Context
 ) : ViewModel() {
     private val _shoes = MutableLiveData<Shoes>()
     val shoes: LiveData<Shoes>
