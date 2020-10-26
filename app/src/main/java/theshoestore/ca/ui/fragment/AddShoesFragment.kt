@@ -31,8 +31,7 @@ class AddShoesFragment : Fragment() {
     ): View? {
         binding = FragmentAddShoesBinding.inflate(inflater, container, false)
 
-        addShoesViewModelFactory = AddShoesViewModelFactory(
-            ShoesRepository(requireContext()), requireContext())
+        addShoesViewModelFactory = AddShoesViewModelFactory(ShoesRepository(requireContext()))
         addShoesViewModel = ViewModelProvider(this, addShoesViewModelFactory)
             .get(AddShoesViewModel::class.java)
 

@@ -13,7 +13,7 @@ import theshoestore.ca.util.Util
 
 class ListViewModel(
     private val repository: ShoesRepository,
-    context: Context
+    private val application: Application
 ) : ViewModel() {
     private val _shoes = MutableLiveData<Shoes>()
     val shoes: LiveData<Shoes>
@@ -23,7 +23,7 @@ class ListViewModel(
     val isPopulated: LiveData<Boolean>
         get() = _isPopulated
 
-    private val mPrefManager = PrefManager(context)
+    private val mPrefManager = PrefManager(application)
 
     fun setPopulated() {
         _isPopulated.value = true

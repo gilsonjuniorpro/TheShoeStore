@@ -1,9 +1,7 @@
 package theshoestore.ca.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
@@ -35,9 +33,9 @@ class ListFragment : Fragment() {
     ): View? {
         binding = FragmentListBinding.inflate(inflater, container, false)
 
-        //viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        val application = requireNotNull(this.activity).application
 
-        listViewModelFactory = ListViewModelFactory(ShoesRepository(requireContext()), requireContext())
+        listViewModelFactory = ListViewModelFactory(ShoesRepository(requireContext()), application)
         listViewModel = ViewModelProvider(this, listViewModelFactory)
             .get(ListViewModel::class.java)
 
@@ -68,6 +66,7 @@ class ListFragment : Fragment() {
             }
         })
 
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -78,9 +77,9 @@ class ListFragment : Fragment() {
             openAddShoes()
         }
 
-        binding.tvLogout.setOnClickListener{
+        /*binding.tvLogout.setOnClickListener{
             loginViewModel.setUserNotLoggedIn()
-        }
+        }*/
     }
 
     private fun setView(list: List<Shoes>) {
@@ -117,5 +116,17 @@ class ListFragment : Fragment() {
     private fun openAddShoes(){
         findNavController().navigate(
                 ListFragmentDirections.actionListFragmentToAddShoesFragment())
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> loginViewModel.setUserNotLoggedIn()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

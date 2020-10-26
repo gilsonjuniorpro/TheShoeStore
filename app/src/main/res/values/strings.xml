@@ -20,6 +20,7 @@
     <string name="user_name">Name</string>
     <string name="register_user">Register User</string>
     <string name="save_shoes">Save Shoes</string>
+    <string name="logout">logout</string>
 
     <string name="large_text">
         THE HISTORY AND EVOLUTION OF SHOES
