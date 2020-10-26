@@ -1,13 +1,10 @@
 package theshoestore.ca.ui.fragment
 
 import android.content.Context
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -52,11 +49,11 @@ class OnBoardingFragment : Fragment() {
         binding.viewPager.adapter = StarterPagerAdapter(Starter.starters, requireContext())
         binding.viewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
-        binding.btnSkip.setOnClickListener { v: View ->
+        binding.btnSkip.setOnClickListener {
             viewModel.setNotFirstTime()
         }
 
-        binding.btnNext.setOnClickListener { v: View ->
+        binding.btnNext.setOnClickListener {
             val current: Int = getItem(+1)
             if (current < Starter.starters.size) {
                 binding.viewPager.currentItem = current
