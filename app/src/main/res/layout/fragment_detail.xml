@@ -10,124 +10,184 @@
             type="theshoestore.ca.viewmodel.DetailViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackgroundLayout"
+        android:fillViewport="true"
+        android:orientation="vertical"
         tools:context=".ui.fragment.RegisterFragment">
 
-        <ImageView
-            android:id="@+id/container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/container_bg"
-            android:contentDescription="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/ivPicture" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/containerBarra"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="0dp"
-            android:background="@drawable/container_barra"
-            android:contentDescription="@null"
-            app:layout_constraintBottom_toBottomOf="@+id/container"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            <ImageView
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/container_bg"
+                android:contentDescription="@null"
+                app:layout_constraintBottom_toTopOf="@+id/btRegister"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ivPicture" />
 
-        <ImageView
-            android:id="@+id/ivPicture"
-            android:layout_width="170dp"
-            android:layout_height="140dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:contentDescription="@string/app_name"
-            android:scaleType="fitXY"
-            app:layout_constraintStart_toStartOf="@+id/container"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/shoe01" />
+            <ImageView
+                android:id="@+id/containerBarra"
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/container_barra"
+                android:contentDescription="@null"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilDescription" />
 
-        <TextView
-            android:id="@+id/tvName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:textColor="@color/black"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:text="@{detailViewModel.shoes.title}"
-            app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
-            app:layout_constraintEnd_toEndOf="@+id/container"
-            app:layout_constraintStart_toEndOf="@+id/ivPicture"
-            app:layout_constraintTop_toTopOf="@+id/container"
-            tools:text="@string/shoes_name" />
+            <ImageView
+                android:id="@+id/ivPicture"
+                android:layout_width="170dp"
+                android:layout_height="140dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="@+id/container"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/shoe01" />
 
-        <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/container"
-            app:layout_constraintEnd_toEndOf="@+id/container"
-            app:layout_constraintStart_toStartOf="@+id/container"
-            app:layout_constraintTop_toBottomOf="@+id/ivPicture">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                style="@style/BoxTextInputLayoutStyleBorderBlack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/shoes_name"
+                app:layout_constraintEnd_toEndOf="@+id/container"
+                app:layout_constraintStart_toStartOf="@+id/container"
+                app:layout_constraintTop_toBottomOf="@+id/ivPicture">
 
-            <TextView
-                android:id="@+id/tvDescription"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietName"
+                    style="@style/EditTextStyleNoBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:maxLength="30"
+                    android:maxLines="3"
+                    android:text="@{detailViewModel.shoes.title}"
+                    android:textColorHint="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilDescription"
+                style="@style/BoxTextInputLayoutStyleBorderBlack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:fontFamily="@font/roboto"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:text="@{detailViewModel.shoes.description}"
-                tools:text="@string/large_text" />
-        </ScrollView>
+                android:hint="@string/shoes_description"
+                app:layout_constraintEnd_toEndOf="@+id/container"
+                app:layout_constraintStart_toStartOf="@+id/container"
+                app:layout_constraintTop_toBottomOf="@+id/tilName">
 
-        <ImageView
-            android:id="@+id/ivMoney"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/app_name"
-            app:layout_constraintBottom_toTopOf="@+id/container"
-            app:layout_constraintEnd_toEndOf="@+id/container"
-            app:layout_constraintTop_toTopOf="@+id/container"
-            app:srcCompat="@drawable/ic_money" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietDescription"
+                    style="@style/EditTextStyleNoBackground"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:ellipsize="end"
+                    android:gravity="top"
+                    android:maxLength="600"
+                    android:maxLines="8"
+                    android:text="@{detailViewModel.shoes.description}"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/white"
+                    android:textSize="15sp"
+                    tools:text="@string/large_text" />
 
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="@font/roboto"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:text="@{detailViewModel.shoes.price}"
-            app:layout_constraintBottom_toTopOf="@+id/container"
-            app:layout_constraintEnd_toEndOf="@+id/container"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/ivPicture"
-            app:layout_constraintTop_toTopOf="@+id/ivPicture"
-            tools:text="$89.00" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPrice"
+                style="@style/BoxTextInputLayoutStyle"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:hint="@string/shoes_price"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/ivPicture"
+                app:layout_constraintTop_toTopOf="@+id/ivPicture">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietPrice"
+                    style="@style/EditTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:maxLength="15"
+                    android:text="@{detailViewModel.shoes.price}"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/ivMoney"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toTopOf="@+id/tilPrice"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tilPrice"
+                app:srcCompat="@drawable/ic_money" />
+
+            <Button
+                android:id="@+id/btRegister"
+                style="@style/ButtonTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:padding="15dp"
+                android:text="@string/save_shoes"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/containerBarra" />
+
+            <View
+                android:id="@+id/viewAdd"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/shape_background_add_picture"
+                app:layout_constraintBottom_toBottomOf="@+id/ivPicture"
+                app:layout_constraintEnd_toEndOf="@+id/ivPicture"
+                app:layout_constraintStart_toEndOf="@+id/ivPicture" />
+
+            <ImageView
+                android:id="@+id/ivAddPicture"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:contentDescription="@string/app_name"
+                android:padding="4dp"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintBottom_toBottomOf="@+id/viewAdd"
+                app:layout_constraintEnd_toEndOf="@+id/viewAdd"
+                app:layout_constraintStart_toStartOf="@+id/viewAdd"
+                app:layout_constraintTop_toTopOf="@+id/viewAdd" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>
