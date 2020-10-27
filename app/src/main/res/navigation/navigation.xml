@@ -77,6 +77,7 @@
         app:popUpToInclusive="true">
         <argument
             android:name="shoe"
+            app:nullable="true"
             app:argType="theshoestore.ca.model.Shoes" />
         <action
             android:id="@+id/action_detailFragment_to_listFragment"

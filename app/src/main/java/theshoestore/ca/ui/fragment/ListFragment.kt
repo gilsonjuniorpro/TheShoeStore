@@ -115,7 +115,7 @@ class ListFragment : Fragment() {
 
     private fun openAddShoes(){
         findNavController().navigate(
-                ListFragmentDirections.actionListFragmentToAddShoesFragment())
+                ListFragmentDirections.actionListFragmentToDetailFragment(null))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
