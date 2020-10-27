@@ -2,7 +2,9 @@ package theshoestore.ca.ui.fragment
 
 import android.os.Bundle
 import android.os.Handler
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -19,14 +21,12 @@ import theshoestore.ca.viewmodel.DetailViewModelFactory
 
 class DetailFragment : Fragment() {
 
-
-
-    private lateinit var action: Any
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var detailViewModelFactory: DetailViewModelFactory
     private var fakeImage: Int = 0
     private lateinit var messageSuccess: String
+    private var isInEditionMode = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +84,7 @@ class DetailFragment : Fragment() {
 
         detailViewModel.action.observe(viewLifecycleOwner, { isCreating ->
             if (isCreating == DetailViewModel.Action.CREATE) {
+                isInEditionMode = true
                 detailViewModel.setInsertingEnabled()
                 changeIconShoesToSample()
                 changeVisibility()
@@ -111,7 +112,12 @@ class DetailFragment : Fragment() {
         }
 
         binding.ivSave.setOnClickListener{
-            detailViewModel.setEditEnabled()
+            if(isInEditionMode) {
+                saveShoes()
+            }else{
+                isInEditionMode = true
+                detailViewModel.setEditEnabled()
+            }
         }
     }
 
@@ -179,6 +185,7 @@ class DetailFragment : Fragment() {
 
     private fun saveShoes(){
         if(validateFields()){
+            isInEditionMode = false
             val shoesName: String = binding.tietName.text.toString()
             val shoesPrice: String = binding.tietPrice.text.toString()
             val shoesDescription: String = binding.tietDescription.text.toString()
@@ -201,3 +208,4 @@ class DetailFragment : Fragment() {
         return this.messageSuccess
     }
 }
+
