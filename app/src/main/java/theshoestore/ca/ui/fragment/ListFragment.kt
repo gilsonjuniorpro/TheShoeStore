@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -31,6 +32,9 @@ class ListFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+        val bar = (activity as AppCompatActivity).supportActionBar
+        bar?.show()
+
         binding = FragmentListBinding.inflate(inflater, container, false)
 
         val application = requireNotNull(this.activity).application
@@ -76,10 +80,6 @@ class ListFragment : Fragment() {
         binding.ivAdd.setOnClickListener{
             openAddShoes()
         }
-
-        /*binding.tvLogout.setOnClickListener{
-            loginViewModel.setUserNotLoggedIn()
-        }*/
     }
 
     private fun setView(list: List<Shoes>) {
@@ -92,11 +92,12 @@ class ListFragment : Fragment() {
             val price: TextView = view.findViewById(R.id.tvPrice)
 
             picture.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                    resources,
-                    shoes.picture, null
-                )
+                    ResourcesCompat.getDrawable(
+                            resources,
+                            shoes.picture, null
+                    )
             )
+
             title.text = shoes.title
             description.text = shoes.description
             price.text = shoes.price

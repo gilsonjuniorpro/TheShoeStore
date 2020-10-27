@@ -2,9 +2,8 @@ package theshoestore.ca.ui.fragment
 
 import android.os.Bundle
 import android.os.Handler
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,15 +19,27 @@ import theshoestore.ca.viewmodel.DetailViewModelFactory
 
 class DetailFragment : Fragment() {
 
+
+
+    private lateinit var action: Any
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var detailViewModelFactory: DetailViewModelFactory
     private var fakeImage: Int = 0
+    private lateinit var messageSuccess: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val bar = (activity as AppCompatActivity).supportActionBar
+        bar?.hide()
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
+        requireActivity()
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
         detailViewModelFactory = DetailViewModelFactory(ShoesRepository(requireContext()))
@@ -50,14 +61,46 @@ class DetailFragment : Fragment() {
         args.shoe?.let { detailViewModel.setShoes(it) }
 
         if (args.shoe != null) {
+            detailViewModel.setShoes(args.shoe as Shoes)
             binding.ivPicture.setImageDrawable(
-                    args.shoe?.picture?.let { ResourcesCompat.getDrawable(resources, it, null) }
+                    args.shoe?.picture?.let {
+                        ResourcesCompat.getDrawable(resources, it, null)
+                    }
             )
+            args.shoe?.picture?.let { image ->
+                setFakeImageForEdit(image)
+            }
+            detailViewModel.setActionUpdate()
         } else {
-            binding.ivPicture.setImageDrawable(
-                    ResourcesCompat.getDrawable(resources, R.drawable.shoes_sample, null)
-            )
+            detailViewModel.setActionCreate()
         }
+
+        detailViewModel.isEditing.observe(viewLifecycleOwner, { isEditing ->
+            if (isEditing) {
+                changeIconSaveOrEdit()
+                changeVisibility()
+            }
+        })
+
+        detailViewModel.action.observe(viewLifecycleOwner, { isCreating ->
+            if (isCreating == DetailViewModel.Action.CREATE) {
+                detailViewModel.setInsertingEnabled()
+                changeIconShoesToSample()
+                changeVisibility()
+                setMessageSuccess(
+                    getString(R.string.msg_shoes_added_success)
+                )
+            }else{
+                setMessageSuccess(
+                    getString(R.string.msg_shoes_updated_success)
+                )
+            }
+        })
+
+        detailViewModel.isInserting.observe(viewLifecycleOwner, { isInserting ->
+            changeIconSaveOrEdit()
+            changeVisibility()
+        })
 
         binding.btRegister.setOnClickListener{
             saveShoes()
@@ -66,19 +109,45 @@ class DetailFragment : Fragment() {
         binding.ivAddPicture.setOnClickListener{
             addFakeShoes()
         }
+
+        binding.ivSave.setOnClickListener{
+            detailViewModel.setEditEnabled()
+        }
+    }
+
+    private fun setMessageSuccess(message: String) {
+        this.messageSuccess = message
+    }
+
+    private fun changeIconSaveOrEdit(){
+        binding.ivSave.setImageDrawable(
+            ResourcesCompat.getDrawable(resources, R.drawable.ic_done, null)
+        )
+    }
+
+    private fun changeIconShoesToSample(){
+        binding.ivPicture.setImageDrawable(
+            ResourcesCompat.getDrawable(resources, R.drawable.shoes_sample, null)
+        )
+    }
+
+    private fun changeVisibility(){
+        binding.ivAddPicture.visibility = View.VISIBLE
+        binding.viewAdd.visibility = View.VISIBLE
     }
 
     private fun addFakeShoes() {
         fakeImage = Util.getImage()
 
         binding.ivPicture.setImageDrawable(
-                ResourcesCompat.getDrawable(
-                        resources,
-                        fakeImage, null
-                )
+            ResourcesCompat.getDrawable(resources, fakeImage, null)
         )
 
         Mark.showAlertSuccess(requireActivity(), getString(R.string.msg_fake_image_added))
+    }
+
+    private fun setFakeImageForEdit(image: Int){
+        fakeImage = image
     }
 
     private fun validateFields() : Boolean{
@@ -114,25 +183,21 @@ class DetailFragment : Fragment() {
             val shoesPrice: String = binding.tietPrice.text.toString()
             val shoesDescription: String = binding.tietDescription.text.toString()
 
-            val shoes = Shoes(
-                    0,
-                    shoesName,
-                    shoesDescription,
-                    shoesPrice,
-                    fakeImage
-            )
-
-            detailViewModel.saveShoes(shoes)
+            detailViewModel.saveShoes(shoesName, shoesPrice, shoesDescription, fakeImage)
             navigateToList()
         }
     }
 
     private fun navigateToList() {
-        Mark.showAlertSuccess(requireActivity(), getString(R.string.msg_shoes_added_success))
+        Mark.showAlertSuccess(requireActivity(), getMessageSuccess())
         Handler().postDelayed({
             binding.progressBar.visibility = View.GONE
             findNavController().navigate(
                     DetailFragmentDirections.actionDetailFragmentToListFragment())
         }, 2000L)
+    }
+
+    private fun getMessageSuccess(): String {
+        return this.messageSuccess
     }
 }
