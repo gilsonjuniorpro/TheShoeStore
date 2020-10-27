@@ -54,13 +54,6 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
         <action
-            android:id="@+id/action_listFragment_to_addShoesFragment"
-            app:destination="@id/addShoesFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
-        <action
             android:id="@+id/action_listFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/fade_in"
@@ -101,20 +94,5 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right"
             />
-    </fragment>
-    <fragment
-        android:id="@+id/addShoesFragment"
-        android:name="theshoestore.ca.ui.fragment.AddShoesFragment"
-        android:label="fragment_add_shoes"
-        tools:layout="@layout/fragment_add_shoes"
-        app:popUpTo="@+id/listFragment"
-        app:popUpToInclusive="true">
-        <action
-            android:id="@+id/action_addShoesFragment_to_listFragment"
-            app:destination="@id/listFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>
