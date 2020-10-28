@@ -9,7 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+//import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation.findNavController
 import com.jarvis.ca.Mark
 import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentDetailBinding
@@ -121,8 +122,7 @@ class DetailFragment : Fragment() {
         }
 
         binding.ivBack.setOnClickListener{
-            findNavController().navigate(
-                    DetailFragmentDirections.actionDetailFragmentToListFragment())
+            Util.cancelInsertOrEdition(requireContext(), findNavController(requireView()))
         }
     }
 
@@ -204,7 +204,7 @@ class DetailFragment : Fragment() {
         Mark.showAlertSuccess(requireActivity(), getMessageSuccess())
         Handler().postDelayed({
             binding.progressBar.visibility = View.GONE
-            findNavController().navigate(
+            findNavController(requireView()).navigate(
                     DetailFragmentDirections.actionDetailFragmentToListFragment())
         }, 2000L)
     }

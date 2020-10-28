@@ -1,6 +1,11 @@
 package theshoestore.ca.util
 
+import android.content.Context
 import android.content.res.Resources
+import android.view.Gravity
+import android.view.Window
+import androidx.appcompat.app.AlertDialog
+import androidx.navigation.NavController
 import theshoestore.ca.R
 import theshoestore.ca.model.Shoes
 import kotlin.random.Random
@@ -124,5 +129,24 @@ object Util {
             4 -> R.drawable.shoe04
             else -> R.drawable.shoe05
         }
+    }
+
+    fun cancelInsertOrEdition(context: Context, navController: NavController) {
+        val builder = AlertDialog.Builder(context, R.style.AlertDialogTheme)
+
+        builder.setMessage(context.getString(R.string.msg_cancel_operation))
+                .setTitle(context.getString(R.string.app_name))
+                .setCancelable(false)
+                .setPositiveButton(context.getString(R.string.dialog_positive)) { view, _ ->
+                    navController.navigate(R.id.listFragment)
+                }
+                .setNegativeButton(context.getString(R.string.dialog_negative)) { _, _ -> }
+
+        val dialog = builder.create()
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val layParams = dialog.window!!.attributes
+        layParams.gravity = Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL
+        dialog.window!!.attributes = layParams
+        dialog.show()
     }
 }
