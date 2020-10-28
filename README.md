@@ -4,8 +4,10 @@
 This is an App made with kotlin as part of the Android Kotlin Developer Nanodegree Program
 
 In this project, I applied my skills in building layouts and navigation files by building a Shoe Store app. This  app has five screens:
+<ul>
+    <li>Onboarding</li>  
+</ul>
 
-Onboarding<br />
 Login
 Register
 Shoe listing
