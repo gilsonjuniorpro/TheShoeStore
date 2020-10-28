@@ -12,8 +12,10 @@
         <action
             android:id="@+id/action_loginFragment_to_onBoardingFragment"
             app:destination="@id/onBoardingFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
+            app:enterAnim="@anim/slide_out_left"
+            app:exitAnim="@anim/slide_in_right"
+            app:popEnterAnim="@anim/slide_out_left"
+            app:popExitAnim="@anim/slide_in_right"
             app:popUpTo="@+id/loginFragment"
             app:popUpToInclusive="true" />
         <action
