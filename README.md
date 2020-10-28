@@ -24,7 +24,7 @@ This  app has **5 screens.**
 <img src="Screenshot_1603881954.png" width="15%"></img>
 <img src="Screenshot_1603881963.png" width="15%"></img>
 <img src="Screenshot_1603881967.png" width="15%"></img>
-<img src="Screenshot_1603881967.png" width="15%"></img>
+<img src="Screenshot_20201028070330.png" width="15%"></img>
 
 ### 💻Technology
 - [Kotlin](https://kotlinlang.org/)
