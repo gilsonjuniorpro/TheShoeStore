@@ -65,9 +65,7 @@
         android:id="@+id/detailFragment"
         android:name="theshoestore.ca.ui.fragment.DetailFragment"
         android:label="Detail Fragment"
-        tools:layout="@layout/fragment_detail"
-        app:popUpTo="@+id/listFragment"
-        app:popUpToInclusive="true">
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="shoe"
             app:nullable="true"
@@ -78,8 +76,7 @@
             app:enterAnim="@anim/slide_out_left"
             app:exitAnim="@anim/slide_in_right"
             app:popEnterAnim="@anim/slide_out_right"
-            app:popExitAnim="@anim/slide_in_left"
-            app:popUpTo="@+id/detailFragment"/>
+            app:popExitAnim="@anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/onBoardingFragment"

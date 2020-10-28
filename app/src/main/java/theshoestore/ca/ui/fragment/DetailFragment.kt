@@ -119,6 +119,11 @@ class DetailFragment : Fragment() {
                 detailViewModel.setEditEnabled()
             }
         }
+
+        binding.ivBack.setOnClickListener{
+            findNavController().navigate(
+                    DetailFragmentDirections.actionDetailFragmentToListFragment())
+        }
     }
 
     private fun setMessageSuccess(message: String) {

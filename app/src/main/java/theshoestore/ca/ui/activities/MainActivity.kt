@@ -16,7 +16,7 @@ import theshoestore.ca.ui.fragment.ListFragmentDirections
 
 class MainActivity : AppCompatActivity() {
 
-    private val navController by lazy { findNavController(R.id.navHost) }
+    val navController by lazy { findNavController(R.id.navHost) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +27,12 @@ class MainActivity : AppCompatActivity() {
         var current = navController.currentDestination?.id
         if (current == R.id.detailFragment) {
             cancelInsertOrEdition()
+        }else{
+            super.onBackPressed()
         }
     }
 
-    private fun cancelInsertOrEdition() {
+    fun cancelInsertOrEdition() {
         val builder = AlertDialog.Builder(this, R.style.AlertDialogTheme)
 
         builder.setMessage(getString(R.string.msg_cancel_operation))
@@ -51,3 +53,4 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
     }
 }
+
