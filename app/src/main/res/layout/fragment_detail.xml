@@ -104,10 +104,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/shoes_name"
-                app:helperTextEnabled="true"
-                app:helperText="@string/helper_shoes_name"
-                app:counterEnabled="true"
-                app:counterMaxLength="25"
                 app:layout_constraintEnd_toEndOf="@+id/container"
                 app:layout_constraintStart_toStartOf="@+id/container"
                 app:layout_constraintTop_toBottomOf="@+id/ivPicture">
@@ -136,10 +132,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:hint="@string/shoes_description"
-                app:helperTextEnabled="true"
-                app:helperText="@string/helper_shoes_description"
-                app:counterEnabled="true"
-                app:counterMaxLength="400"
                 app:layout_constraintEnd_toEndOf="@+id/container"
                 app:layout_constraintStart_toStartOf="@+id/container"
                 app:layout_constraintTop_toBottomOf="@+id/tilName">
@@ -151,8 +143,9 @@
                     android:layout_height="200dp"
                     android:ellipsize="end"
                     android:gravity="top"
-                    android:maxLength="400"
-                    android:maxLines="5"
+                    android:maxLength="350"
+                    android:maxLines="9"
+                    android:inputType="textMultiLine"
                     android:enabled="@{detailViewModel.isEditing()}"
                     android:text="@{detailViewModel.shoes.description}"
                     tools:text="@string/large_text" />
