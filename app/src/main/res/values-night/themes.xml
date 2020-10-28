@@ -61,7 +61,7 @@
         <item name="android:textSize">18sp</item>
     </style>
     <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textColor">#F13535</item>
         <item name="rippleColor">@color/white</item>
     </style>
     <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
