@@ -5,7 +5,7 @@ This is an App made with kotlin as part of the Android Kotlin Developer Nanodegr
 
 In this project, I applied my skills in building layouts and navigation files by building a Shoe Store app. This  app has five screens:
 
-Onboarding
+Onboarding<br />
 Login
 Register
 Shoe listing
