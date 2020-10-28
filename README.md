@@ -1,16 +1,16 @@
 # TheShoeStore - Udacity Project
 
 ### **Overview - About this project**
-This is an App made with kotlin as part of the Android Kotlin Developer Nanodegree Program
+This is an App made with kotlin as part of the **Android Kotlin Developer Nanodegree Program**
 
-In this project, I applied my skills in building layouts and navigation files by building a Shoe Store app. This  app has 6 screens:
+In this project, I applied my skills in building layouts and navigation files by building a Shoe Store app. <br />
+This  app has **5 screens.**
 <ul>
     <li>Login</li> 
     <li>Register</li> 
     <li>Onboarding</li> 
     <li>Shoe listing</li> 
-    <li>Shoe detail page</li>
-    <li>Shoe edit page</li>
+    <li>Shoe detail page (edit/insert)</li>
 </ul>
 
 ### 📷 How is this Project
@@ -23,6 +23,7 @@ In this project, I applied my skills in building layouts and navigation files by
 <img src="Screenshot_1603881949.png" width="15%"></img>
 <img src="Screenshot_1603881954.png" width="15%"></img>
 <img src="Screenshot_1603881963.png" width="15%"></img>
+<img src="Screenshot_1603881967.png" width="15%"></img>
 <img src="Screenshot_1603881967.png" width="15%"></img>
 
 ### 💻Technology
