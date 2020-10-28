@@ -22,13 +22,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:hint="@string/user_name"
                 android:importantForAutofill="yes"
                 android:inputType="textPersonName"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView"
                 tools:ignore="Autofill" />
+
+            <TextView
+                android:id="@+id/tvNameLabel"
+                style="@style/LabelTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/user_name"
+                app:layout_constraintBottom_toTopOf="@+id/etName"
+                app:layout_constraintStart_toStartOf="@+id/etName"
+                app:layout_constraintTop_toTopOf="@+id/etName" />
 
             <EditText
                 android:id="@+id/etEmail"
@@ -38,13 +48,23 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
-                android:hint="@string/user_email"
                 android:importantForAutofill="yes"
                 android:inputType="textEmailAddress"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etName"
                 tools:ignore="Autofill" />
+
+            <TextView
+                android:id="@+id/tvEmailLabel"
+                style="@style/LabelTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/user_email"
+                app:layout_constraintBottom_toTopOf="@+id/etEmail"
+                app:layout_constraintStart_toStartOf="@+id/etEmail"
+                app:layout_constraintTop_toTopOf="@+id/etEmail" />
 
             <EditText
                 android:id="@+id/etPassword"
@@ -53,12 +73,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:ems="10"
-                android:hint="@string/user_password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="@+id/etEmail"
                 app:layout_constraintStart_toStartOf="@+id/etEmail"
                 app:layout_constraintTop_toBottomOf="@+id/etEmail"
                 tools:ignore="Autofill" />
+
+            <TextView
+                android:id="@+id/tvPasswordLabel"
+                style="@style/LabelTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/user_password"
+                app:layout_constraintBottom_toTopOf="@+id/etPassword"
+                app:layout_constraintStart_toStartOf="@+id/etPassword"
+                app:layout_constraintTop_toTopOf="@+id/etPassword" />
 
             <Button
                 android:id="@+id/btRegister"
