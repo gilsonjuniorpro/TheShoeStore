@@ -12,14 +12,16 @@ Shoe listing
 Shoe detail page
 
 ### 📷 How is this Project
-<img src="Screenshot_1603505879.png" width="15%"></img>
-<img src="Screenshot_1603505884.png" width="15%"></img>
-<img src="Screenshot_1603505889.png" width="15%"></img>
-<img src="Screenshot_1603505893.png" width="15%"></img>
-<img src="Screenshot_1603505900.png" width="15%"></img>
-<img src="Screenshot_1603505903.png" width="15%"></img>
-<img src="Screenshot_1603505916.png" width="15%"></img>
-<img src="Screenshot_1603505933.png" width="15%"></img>
+<img src="Screenshot_1603881882.png" width="15%"></img>
+<img src="Screenshot_1603881888.png" width="15%"></img>
+<img src="Screenshot_1603881932.png" width="15%"></img>
+<img src="Screenshot_1603881938.png" width="15%"></img>
+<img src="Screenshot_1603881941.png" width="15%"></img>
+<img src="Screenshot_1603881944.png" width="15%"></img>
+<img src="Screenshot_1603881949.png" width="15%"></img>
+<img src="Screenshot_1603881954.png" width="15%"></img>
+<img src="Screenshot_1603881963.png" width="15%"></img>
+
 
 ### 💻Technology
 - [Kotlin](https://kotlinlang.org/)
