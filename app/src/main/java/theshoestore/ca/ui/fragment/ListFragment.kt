@@ -61,6 +61,7 @@ class ListFragment : Fragment() {
 
         listViewModel.allShoes.observe(viewLifecycleOwner, { list ->
             setView(list)
+            //setItemsToRecyclerView(list)
         })
 
         listViewModel.isPopulated.observe(viewLifecycleOwner, { isPopulated ->
