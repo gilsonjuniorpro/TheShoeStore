@@ -9,10 +9,13 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.repository.ShoesRepository
+import theshoestore.ca.ui.adapter.ShoesAdapter
+import theshoestore.ca.ui.adapter.ShoesListener
 import theshoestore.ca.viewmodel.ListViewModel
 import theshoestore.ca.viewmodel.ListViewModelFactory
 import theshoestore.ca.viewmodel.LoginViewModel
@@ -22,7 +25,6 @@ import theshoestore.ca.viewmodel.LoginViewModelFactory
 class ListFragment : Fragment() {
 
     private lateinit var binding: FragmentListBinding
-    //private lateinit var viewModel: LoginViewModel
     private lateinit var listViewModel: ListViewModel
     private lateinit var listViewModelFactory: ListViewModelFactory
     private lateinit var loginViewModel: LoginViewModel
@@ -59,8 +61,14 @@ class ListFragment : Fragment() {
             }
         })
 
+        binding.recyclerShoes.layoutManager = LinearLayoutManager(requireContext())
+        val adapter = ShoesAdapter(ShoesListener { shoes ->
+            openDetail(shoes)
+        })
+        binding.recyclerShoes.adapter = adapter
+
         listViewModel.allShoes.observe(viewLifecycleOwner, { list ->
-            setView(list)
+            adapter.submitList(list)
         })
 
         listViewModel.isPopulated.observe(viewLifecycleOwner, { isPopulated ->
