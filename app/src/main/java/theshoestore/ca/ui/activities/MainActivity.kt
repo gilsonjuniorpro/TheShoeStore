@@ -18,7 +18,7 @@ import theshoestore.ca.util.Util
 
 class MainActivity : AppCompatActivity() {
 
-    val navController by lazy { findNavController(R.id.navHost) }
+    private val navController by lazy { findNavController(R.id.navHost) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
