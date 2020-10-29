@@ -1,66 +1,55 @@
 package theshoestore.ca.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.item_shoes.view.*
-import theshoestore.ca.R
+import theshoestore.ca.databinding.ItemShoesBinding
 import theshoestore.ca.model.Shoes
 
-class ShoesAdapter(
-    private val items: List<Shoes>,
-    private val onItemClick: (Shoes) -> Unit
-): RecyclerView.Adapter<ShoesAdapter.ShoeHolder>() {
+class ShoesAdapter(private val clickListener: ShoesListener) : ListAdapter<Shoes,
+        ShoesAdapter.ShoesHolder>(ShoesCallBack()) {
 
-    private var context: Context? = null
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): ShoeHolder {
-        return ShoeHolder.from(this, parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoesHolder {
+        return ShoesHolder.from(parent)
     }
 
-    override fun onBindViewHolder(holder: ShoeHolder, position: Int) {
-        val shoe = items[position]
-
-        holder.bind(shoe, context, onItemClick(shoe))
+    override fun onBindViewHolder(holder: ShoesHolder, position: Int) {
+        val shoes = getItem(position)
+        holder.bind(clickListener, shoes)
     }
 
-    override fun getItemCount(): Int = items.size
-
-    class ShoeHolder private constructor(rootView: View) : RecyclerView.ViewHolder(rootView){
-        private val tvName: TextView = rootView.tvName
-        private val tvDescription: TextView = rootView.tvDescription
-        private val tvPrice: TextView = rootView.tvPrice
-        private val ivPicture: ImageView = rootView.ivPicture
-
-        fun bind(shoe: Shoes, context: Context?, onItemClick: Unit) {
-            tvName.text = shoe.title
-            tvDescription.text = shoe.description
-            tvPrice.text = shoe.price
-            ivPicture.setImageDrawable(
-                    ResourcesCompat.getDrawable(context!!.resources, shoe.picture!!, null)
-            )
-            itemView.setOnClickListener { onItemClick }
+    class ShoesHolder private constructor(private val binding: ItemShoesBinding):
+            RecyclerView.ViewHolder(binding.root){
+        fun bind(clickListener: ShoesListener, shoes: Shoes) {
+            binding.shoes = shoes
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
         }
 
         companion object {
-            fun from(shoesAdapter: ShoesAdapter, parent: ViewGroup): ShoeHolder {
-                val layout = LayoutInflater.from(parent.context)
-                        .inflate(R.layout.item_shoes, parent, false)
-
-                shoesAdapter.context = parent.context
-
-                return ShoeHolder(layout)
+            fun from(parent: ViewGroup): ShoesHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemShoesBinding.inflate(layoutInflater, parent, false)
+                return ShoesHolder(binding)
             }
         }
     }
 
 
+}
+
+class ShoesCallBack : DiffUtil.ItemCallback<Shoes>() {
+    override fun areItemsTheSame(oldItem: Shoes, newItem: Shoes): Boolean {
+        return oldItem.id == newItem.id
+    }
+
+    override fun areContentsTheSame(oldItem: Shoes, newItem: Shoes): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class ShoesListener(val clickListener: (shoes: Shoes) -> Unit) {
+    fun onClick(shoes: Shoes) = clickListener(shoes)
 }
