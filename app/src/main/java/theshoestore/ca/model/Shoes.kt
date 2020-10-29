@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 @Entity
-class Shoes(
+data class Shoes(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,
