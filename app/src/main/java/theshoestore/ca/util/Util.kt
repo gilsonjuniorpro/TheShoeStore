@@ -233,12 +233,13 @@ object Util {
     }
 
     fun getImage(): Int{
-        return when ((1..5).random()) {
-            1 -> R.drawable.shoe01
-            2 -> R.drawable.shoe02
-            3 -> R.drawable.shoe03
-            4 -> R.drawable.shoe04
-            else -> R.drawable.shoe05
+        return when ((1..6).random()) {
+            1 -> R.drawable.shoes_m990v5
+            2 -> R.drawable.shoes_m1080v10
+            3 -> R.drawable.shoes_mroavv1
+            4 -> R.drawable.shoes_mlc100v1
+            5 -> R.drawable.shoes_ml574v2
+            else -> R.drawable.shoes_bbomnlv1
         }
     }
 
