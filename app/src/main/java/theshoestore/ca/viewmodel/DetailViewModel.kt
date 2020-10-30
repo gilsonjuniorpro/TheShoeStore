@@ -5,9 +5,9 @@ import kotlinx.coroutines.launch
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.repository.ShoesRepository
 
-private val ACTION_UPDATE = "update"
-private val ACTION_CREATE = "create"
-private val ACTION_DELETE = "delete"
+private const val ACTION_UPDATE = "update"
+private const val ACTION_CREATE = "create"
+private const val ACTION_DELETE = "delete"
 
 class DetailViewModel(
         private val repository: ShoesRepository
