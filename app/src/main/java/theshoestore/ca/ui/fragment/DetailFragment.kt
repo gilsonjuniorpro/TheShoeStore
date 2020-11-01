@@ -38,9 +38,7 @@ class DetailFragment : Fragment() {
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-    ): View? {
-
-        requireActivity()
+    ): View? { //requireActivity()
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
         detailViewModelFactory = DetailViewModelFactory(ShoesRepository(requireContext()))
@@ -212,5 +210,9 @@ class DetailFragment : Fragment() {
     private fun getMessageSuccess(): String {
         return this.messageSuccess
     }
+}
+
+fun String.toName(): String {
+    return this.toUpperCase()
 }
 
