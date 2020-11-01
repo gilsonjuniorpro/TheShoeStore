@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-//import androidx.navigation.fragment.findNavController
 import androidx.navigation.Navigation.findNavController
 import com.jarvis.ca.Mark
 import theshoestore.ca.R
