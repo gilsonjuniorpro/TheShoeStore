@@ -36,8 +36,6 @@ class ShoesAdapter(private val clickListener: ShoesListener) : ListAdapter<Shoes
             }
         }
     }
-
-
 }
 
 class ShoesCallBack : DiffUtil.ItemCallback<Shoes>() {

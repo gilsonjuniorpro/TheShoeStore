@@ -214,4 +214,3 @@ class DetailFragment : Fragment() {
 fun String.toName(): String {
     return this.toUpperCase()
 }
-
