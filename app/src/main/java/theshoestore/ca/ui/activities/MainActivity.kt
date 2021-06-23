@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        var current = navController.currentDestination?.id
+        val current = navController.currentDestination?.id
         if (current == R.id.detailFragment) {
             Util.cancelInsertOrEdition(this, navController)
         }else{
