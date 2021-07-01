@@ -84,7 +84,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    fun Context.hideKeyboard(view: View) {
+    private fun Context.hideKeyboard(view: View) {
         (getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager)?.apply {
             hideSoftInputFromWindow(view.windowToken, 0)
         }

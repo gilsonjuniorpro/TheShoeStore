@@ -20,4 +20,7 @@ interface ShoesDao {
 
     @Delete
     suspend fun deleteShoes(vararg note: Shoes)
+
+    @Query("SELECT COUNT(*) FROM shoes")
+    fun count(): Int
 }

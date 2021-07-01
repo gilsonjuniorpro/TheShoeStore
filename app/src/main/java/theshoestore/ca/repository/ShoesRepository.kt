@@ -28,4 +28,8 @@ class ShoesRepository(context: Context) {
     fun getShoes(id: Int): Shoes {
         return shoesDao.getShoes(id)
     }
+
+    fun count() : Int{
+        return shoesDao.count()
+    }
 }

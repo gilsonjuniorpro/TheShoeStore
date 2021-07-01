@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
 import theshoestore.ca.R
 import theshoestore.ca.model.Shoes
+import theshoestore.ca.model.ShoesDto
 import kotlin.random.Random
 
 object Util {
@@ -24,7 +25,7 @@ object Util {
                         "Dual Density Collar Foam\n" +
                         "ENCAP PU Ring with EVA Core",
                     "$229.99",
-                R.drawable.shoes_m990v5
+                "R.drawable.shoes_m990v5"
             ),
             Shoes(
                 2,
@@ -38,7 +39,7 @@ object Util {
                         "Rubber outsole\n" +
                         "Suede and mesh upper for a comfortable fit and feel",
                     "$109.99",
-                R.drawable.shoes_ml574v2
+                "R.drawable.shoes_ml574v2"
             ),
             Shoes(
                 3,
@@ -52,7 +53,7 @@ object Util {
                         "Ortholite cushion insert designed for unmatched comfort and significant moisture control to combat sweat\n" +
                         "Ultra Heel design hugs the back of the foot for a snug, supportive fit",
                     "$209.99",
-                R.drawable.shoes_m1080v10
+                "R.drawable.shoes_m1080v10"
             ),
             Shoes(
                 4,
@@ -63,7 +64,7 @@ object Util {
                             "Mesh/synthetic upper\n" +
                             "Ultra Heel design hugs the back of the foot for a snug, supportive fit",
                 "$109.99",
-                R.drawable.shoes_mroavv1
+                "R.drawable.shoes_mroavv1"
             ),
             Shoes(
                 5,
@@ -73,7 +74,7 @@ object Util {
                             "Lace-up closure for a secure fit\n" +
                             "Leather upper for comfort and style",
                 "$89.00",
-                R.drawable.shoes_mlc100v1
+                "R.drawable.shoes_mlc100v1"
             ),
             Shoes(
                 6,
@@ -83,7 +84,7 @@ object Util {
                             "Low cut\n" +
                             "Ultra heel design hugs the back of the foot for a snug, supportive fit",
                 "$49.00",
-                R.drawable.shoes_bbomnlv1
+                "R.drawable.shoes_bbomnlv1"
             ),
                 Shoes(
                         7,
@@ -96,7 +97,7 @@ object Util {
                                 "Dual Density Collar Foam\n" +
                                 "ENCAP PU Ring with EVA Core",
                         "$229.99",
-                        R.drawable.shoes_m990v5
+                        "R.drawable.shoes_m990v5"
                 ),
                 Shoes(
                         8,
@@ -110,7 +111,7 @@ object Util {
                                 "Rubber outsole\n" +
                                 "Suede and mesh upper for a comfortable fit and feel",
                         "$109.99",
-                        R.drawable.shoes_ml574v2
+                        "R.drawable.shoes_ml574v2"
                 ),
                 Shoes(
                         9,
@@ -124,7 +125,7 @@ object Util {
                                 "Ortholite cushion insert designed for unmatched comfort and significant moisture control to combat sweat\n" +
                                 "Ultra Heel design hugs the back of the foot for a snug, supportive fit",
                         "$209.99",
-                        R.drawable.shoes_m1080v10
+                        "R.drawable.shoes_m1080v10"
                 ),
                 Shoes(
                         10,
@@ -135,7 +136,7 @@ object Util {
                                 "Mesh/synthetic upper\n" +
                                 "Ultra Heel design hugs the back of the foot for a snug, supportive fit",
                         "$109.99",
-                        R.drawable.shoes_mroavv1
+                        "R.drawable.shoes_mroavv1"
                 ),
                 Shoes(
                         11,
@@ -145,7 +146,7 @@ object Util {
                                 "Lace-up closure for a secure fit\n" +
                                 "Leather upper for comfort and style",
                         "$89.00",
-                        R.drawable.shoes_mlc100v1
+                        "R.drawable.shoes_mlc100v1"
                 ),
                 Shoes(
                         12,
@@ -155,7 +156,7 @@ object Util {
                                 "Low cut\n" +
                                 "Ultra heel design hugs the back of the foot for a snug, supportive fit",
                         "$49.00",
-                        R.drawable.shoes_bbomnlv1
+                        "R.drawable.shoes_bbomnlv1"
                 ),
                 Shoes(
                         13,
@@ -168,7 +169,7 @@ object Util {
                                 "Dual Density Collar Foam\n" +
                                 "ENCAP PU Ring with EVA Core",
                         "$229.99",
-                        R.drawable.shoes_m990v5
+                        "R.drawable.shoes_m990v5"
                 ),
                 Shoes(
                         14,
@@ -182,7 +183,7 @@ object Util {
                                 "Rubber outsole\n" +
                                 "Suede and mesh upper for a comfortable fit and feel",
                         "$109.99",
-                        R.drawable.shoes_ml574v2
+                        "R.drawable.shoes_ml574v2"
                 ),
                 Shoes(
                         15,
@@ -196,7 +197,7 @@ object Util {
                                 "Ortholite cushion insert designed for unmatched comfort and significant moisture control to combat sweat\n" +
                                 "Ultra Heel design hugs the back of the foot for a snug, supportive fit",
                         "$209.99",
-                        R.drawable.shoes_m1080v10
+                        "R.drawable.shoes_m1080v10"
                 ),
                 Shoes(
                         16,
@@ -207,7 +208,7 @@ object Util {
                                 "Mesh/synthetic upper\n" +
                                 "Ultra Heel design hugs the back of the foot for a snug, supportive fit",
                         "$109.99",
-                        R.drawable.shoes_mroavv1
+                        "R.drawable.shoes_mroavv1"
                 ),
                 Shoes(
                         17,
@@ -217,7 +218,7 @@ object Util {
                                 "Lace-up closure for a secure fit\n" +
                                 "Leather upper for comfort and style",
                         "$89.00",
-                        R.drawable.shoes_mlc100v1
+                        "R.drawable.shoes_mlc100v1"
                 ),
                 Shoes(
                         18,
@@ -227,7 +228,7 @@ object Util {
                                 "Low cut\n" +
                                 "Ultra heel design hugs the back of the foot for a snug, supportive fit",
                         "$49.00",
-                        R.drawable.shoes_bbomnlv1
+                        "R.drawable.shoes_bbomnlv1"
                 ),
         )
     }
@@ -261,4 +262,12 @@ object Util {
         dialog.window!!.attributes = layParams
         dialog.show()
     }
+
+    fun mapShoesDtoToShoes(dto: ShoesDto) = Shoes(
+        dto.id,
+        dto.title,
+        dto.description,
+        dto.price,
+        dto.picture
+    )
 }

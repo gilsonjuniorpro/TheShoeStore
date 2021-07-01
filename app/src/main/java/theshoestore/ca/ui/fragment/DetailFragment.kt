@@ -10,11 +10,14 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.jarvis.ca.Mark
 import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentDetailBinding
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.repository.ShoesRepository
+import theshoestore.ca.util.Constants
 import theshoestore.ca.util.Util
 import theshoestore.ca.viewmodel.DetailViewModel
 import theshoestore.ca.viewmodel.DetailViewModelFactory
@@ -60,14 +63,15 @@ class DetailFragment : Fragment() {
 
         if (args.shoe != null) {
             detailViewModel.setShoes(args.shoe as Shoes)
-            binding.ivPicture.setImageDrawable(
-                    args.shoe?.picture?.let {
-                        ResourcesCompat.getDrawable(resources, it, null)
-                    }
-            )
-            args.shoe?.picture?.let { image ->
+            Glide
+                .with(requireContext())
+                .load("${Constants.URL_IMAGES}/${args.shoe?.picture}")
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(binding.ivPicture)
+
+            /*args.shoe?.picture?.let { image ->
                 setFakeImageForEdit(image)
-            }
+            }*/
             detailViewModel.setActionUpdate()
         } else {
             detailViewModel.setActionCreate()

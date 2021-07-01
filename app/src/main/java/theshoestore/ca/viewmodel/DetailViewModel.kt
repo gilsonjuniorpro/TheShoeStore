@@ -94,7 +94,7 @@ class DetailViewModel(
                 shoesName,
                 shoesDescription,
                 shoesPrice,
-                fakeImage
+                "shoes_sample.png"
             )
         }
     }

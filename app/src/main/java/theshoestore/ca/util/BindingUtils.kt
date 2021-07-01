@@ -4,17 +4,18 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import theshoestore.ca.model.Shoes
 
 @BindingAdapter("shoesImage")
 fun ImageView.setShoesImage(shoes: Shoes?) {
     shoes?.let {
-        setImageDrawable(
-            ResourcesCompat.getDrawable(
-                resources,
-                shoes.picture, null
-            )
-        )
+        Glide
+            .with(this.context)
+            .load("${Constants.URL_IMAGES}/${shoes.picture}")
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(this)
     }
 }
 

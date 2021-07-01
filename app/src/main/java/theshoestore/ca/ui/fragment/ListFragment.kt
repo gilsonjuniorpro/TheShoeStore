@@ -5,11 +5,12 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.model.Shoes
@@ -69,12 +70,12 @@ class ListFragment : Fragment() {
 
         listViewModel.allShoes.observe(viewLifecycleOwner, { list ->
             adapter.submitList(list)
+            binding.recyclerShoes.scrollToPosition(0)
         })
 
         listViewModel.isPopulated.observe(viewLifecycleOwner, { isPopulated ->
             if (!isPopulated) {
                 listViewModel.insertListShoes()
-                listViewModel.setPopulated()
             }
         })
 
@@ -90,7 +91,7 @@ class ListFragment : Fragment() {
         }
     }
 
-    private fun setView(list: List<Shoes>) {
+/*    private fun setView(list: List<Shoes>) {
         val inflater : LayoutInflater = LayoutInflater.from(requireContext())
         list.forEach { shoes ->
             val view: View = inflater.inflate(R.layout.item_shoes, binding.recyclerShoes, false)
@@ -99,12 +100,11 @@ class ListFragment : Fragment() {
             val description: TextView = view.findViewById(R.id.tvDescription)
             val price: TextView = view.findViewById(R.id.tvPrice)
 
-            picture.setImageDrawable(
-                    ResourcesCompat.getDrawable(
-                            resources,
-                            shoes.picture, null
-                    )
-            )
+            Glide
+                .with(requireContext())
+                .load(shoes.picture)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(picture)
 
             title.text = shoes.title
             description.text = shoes.description
@@ -115,7 +115,7 @@ class ListFragment : Fragment() {
             }
             binding.recyclerShoes.addView(view)
         }
-    }
+    }*/
 
     private fun openDetail(shoe: Shoes){
         findNavController().navigate(
