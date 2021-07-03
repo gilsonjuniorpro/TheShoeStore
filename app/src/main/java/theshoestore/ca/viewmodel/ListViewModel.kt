@@ -1,6 +1,5 @@
 package theshoestore.ca.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -9,13 +8,10 @@ import theshoestore.ca.model.Shoes
 import theshoestore.ca.model.ShoesDto
 import theshoestore.ca.repository.ShoesHttp
 import theshoestore.ca.repository.ShoesRepository
-import theshoestore.ca.util.PrefManager
 import theshoestore.ca.util.Util
-import java.lang.Exception
 
 class ListViewModel(
-    private val repository: ShoesRepository,
-    application: Application
+    private val repository: ShoesRepository
 ) : ViewModel() {
     private val _shoes = MutableLiveData<Shoes>()
     val shoes: LiveData<Shoes>
@@ -29,11 +25,8 @@ class ListViewModel(
     val state: LiveData<State>
         get() = _state
 
-    //private val mPrefManager = PrefManager(application)
-
     fun setPopulated() {
         _isPopulated.value = true
-        //mPrefManager.setPopulated(true)
     }
 
     init {
@@ -83,7 +76,6 @@ class ListViewModel(
                 _state.value = State.Loaded(list.items)
             }
 
-            //val list = Util.getListOfShoes()
             list?.items?.forEach{ shoes ->
                 repository.saveShoes(Util.mapShoesDtoToShoes(shoes))
             }

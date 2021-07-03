@@ -71,9 +71,6 @@ class OnBoardingFragment : Fragment() {
     }
 
     private fun goToList(){
-        /*findNavController().navigate(
-            OnBoardingFragmentDirections.actionOnBoardingFragmentToListFragment()
-        )*/
         Navigation.findNavController(requireView()).navigate(R.id.listFragment)
     }
 

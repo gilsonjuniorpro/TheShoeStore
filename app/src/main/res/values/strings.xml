@@ -44,4 +44,7 @@
     </string>
     <string name="helper_shoes_name">type here shoes name</string>
     <string name="helper_shoes_description">type here shoes description</string>
+
+    <string name="msg_permission_success">Permissions Granted</string>
+    <string name="msg_permission_error">Permissions Refused</string>
 </resources>

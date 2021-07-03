@@ -37,10 +37,6 @@ class PrefManager(context: Context?) {
         editor!!.commit()
     }
 
-    fun isPopulated(): Boolean {
-        return pref!!.getBoolean(IS_POPULATED, false)
-    }
-
     fun setLoggedIn(isLoggedIn: Boolean) {
         editor!!.putBoolean(IS_LOGGEDIN, isLoggedIn)
         editor!!.commit()

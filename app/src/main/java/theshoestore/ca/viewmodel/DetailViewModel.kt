@@ -1,6 +1,9 @@
 package theshoestore.ca.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.repository.ShoesRepository
@@ -10,7 +13,7 @@ private const val ACTION_CREATE = "create"
 private const val ACTION_DELETE = "delete"
 
 class DetailViewModel(
-        private val repository: ShoesRepository
+    private val repository: ShoesRepository
 ) : ViewModel() {
 
     enum class Action(val action: String) {
@@ -68,23 +71,32 @@ class DetailViewModel(
         _shoes.value = shoes
     }
 
-    fun saveShoes(shoesName: String, shoesPrice: String, shoesDescription: String, fakeImage: Int){
-        val shoes = setShoesProperties(shoesName, shoesPrice, shoesDescription, fakeImage)
+    fun saveShoes(
+        shoesName: String?,
+        shoesPrice: String?,
+        shoesDescription: String?,
+        imagePath: String?,
+        pictureUri: String?
+    ) {
+        val shoes =
+            setShoesProperties(shoesName, shoesPrice, shoesDescription, imagePath, pictureUri)
 
-        viewModelScope.launch{
-            if(action.value == Action.CREATE) {
+        viewModelScope.launch {
+            if (action.value == Action.CREATE) {
                 shoes?.let { repository.saveShoes(it) }
-            }else{
+            } else {
                 shoes?.let { repository.updateShoes(it) }
             }
         }
     }
 
-    private fun setShoesProperties(shoesName: String, shoesPrice: String,
-                                   shoesDescription: String, fakeImage: Int): Shoes? {
-        var id = if(action.value == Action.CREATE) {
+    private fun setShoesProperties(
+        shoesName: String?, shoesPrice: String?, shoesDescription: String?,
+        imagePath: String?, pictureUri: String?
+    ): Shoes? {
+        var id = if (action.value == Action.CREATE) {
             0
-        }else{
+        } else {
             shoes.value?.id
         }
 
@@ -94,7 +106,8 @@ class DetailViewModel(
                 shoesName,
                 shoesDescription,
                 shoesPrice,
-                "shoes_sample.png"
+                imagePath,
+                pictureUri
             )
         }
     }

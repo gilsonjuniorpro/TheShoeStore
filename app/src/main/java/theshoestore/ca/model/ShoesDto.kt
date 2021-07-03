@@ -9,5 +9,6 @@ class ShoesDto(
     val title: String? = null,
     val description: String? = null,
     val price: String? = null,
-    val picture: String? = null
+    val picture: String? = null,
+    val pictureUri: String? = null
 ): Parcelable

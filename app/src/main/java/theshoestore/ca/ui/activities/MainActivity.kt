@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_on_boarding.*
 import theshoestore.ca.R
+import theshoestore.ca.core.ShoesApplication
 import theshoestore.ca.ui.fragment.DetailFragment
 import theshoestore.ca.ui.fragment.DetailFragmentDirections
 import theshoestore.ca.ui.fragment.ListFragmentDirections
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        ShoesApplication.setContentResolver(this.contentResolver)
     }
 
     override fun onBackPressed() {

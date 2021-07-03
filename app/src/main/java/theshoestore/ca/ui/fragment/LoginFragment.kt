@@ -19,7 +19,6 @@ class LoginFragment : Fragment() {
     lateinit var binding: FragmentLoginBinding
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var loginViewModelFactory: LoginViewModelFactory
-    //private val navController by lazy { NavHostFragment.findNavController(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +37,6 @@ class LoginFragment : Fragment() {
         loginViewModel.isUserLoggedIn.observe(viewLifecycleOwner, { isLoggedIn ->
             if (isLoggedIn) {
                 findNavController(requireView()).navigate(R.id.onBoardingFragment)
-                /*val action = LoginFragmentDirections.actionLoginFragmentToOnBoardingFragment()
-                findNavController(requireView()).navigate(action)*/
             }
         })
 

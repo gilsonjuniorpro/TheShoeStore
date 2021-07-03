@@ -1,15 +1,24 @@
 package theshoestore.ca.util
 
+import android.content.ContentResolver
 import android.content.Context
-import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.view.Gravity
 import android.view.Window
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.NavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import theshoestore.ca.R
+import theshoestore.ca.core.ShoesApplication
 import theshoestore.ca.model.Shoes
 import theshoestore.ca.model.ShoesDto
-import kotlin.random.Random
+import java.io.ByteArrayOutputStream
+import java.io.FileNotFoundException
 
 object Util {
     fun getListOfShoes(): MutableList<Shoes> {
@@ -268,6 +277,61 @@ object Util {
         dto.title,
         dto.description,
         dto.price,
-        dto.picture
+        dto.picture,
+        dto.pictureUri
     )
+
+    fun getBitmap(uri: Uri?): Bitmap? {
+        if (uri == null) return null
+        var bitmap: Bitmap? = null
+        try {
+            val cr: ContentResolver = ShoesApplication.getResolver()
+            bitmap = BitmapFactory.decodeStream(cr.openInputStream(uri))
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
+        }
+        return bitmap
+    }
+
+    fun showToast(mContext: Context, message: String) {
+        val toast = Toast.makeText(mContext, message, Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL, 0, 0)
+        toast.show()
+    }
+
+    fun getBytes(bitmap: Bitmap): ByteArray {
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream)
+        return stream.toByteArray()
+    }
+
+    fun generateName(): String {
+        val rand1 = java.util.Random().nextInt(999) + 1
+        val rand2 = java.util.Random().nextInt(999) + 1
+        val rand3 = java.util.Random().nextInt(999) + 1
+        return "goRaptors_" + rand1 + "_" + rand2 + "_" + rand3 + ".jpeg"
+    }
+
+    fun loadImage(shoes: Shoes, context: Context, view: ImageView){
+        if(shoes.pictureUri.isNullOrBlank()){
+            Glide
+                .with(context)
+                .load("${Constants.URL_IMAGES}/${shoes.picture}")
+                .placeholder(R.drawable.shoes_sample)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(view)
+        }else{
+            try{
+                val bitmap = getBitmap(Uri.parse(shoes.pictureUri))
+                view.setImageBitmap(bitmap)
+            }catch (e: Exception){
+                Glide
+                    .with(context)
+                    .load("${Constants.URL_IMAGES}/${shoes.picture}")
+                    .placeholder(R.drawable.shoes_sample)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(view)
+            }
+        }
+    }
 }

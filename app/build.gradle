@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "theshoestore.ca"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -79,4 +79,8 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+
+    implementation 'com.huangyz0918:androidwm:0.2.3'
 }

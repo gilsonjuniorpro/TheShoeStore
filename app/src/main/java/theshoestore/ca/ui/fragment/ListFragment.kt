@@ -1,16 +1,14 @@
 package theshoestore.ca.ui.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentListBinding
 import theshoestore.ca.model.Shoes
@@ -40,9 +38,11 @@ class ListFragment : Fragment() {
 
         binding = FragmentListBinding.inflate(inflater, container, false)
 
-        val application = requireNotNull(this.activity).application
+        Handler().postDelayed({
+            binding.progressBar.visibility = View.GONE
+        }, 2000L)
 
-        listViewModelFactory = ListViewModelFactory(ShoesRepository(requireContext()), application)
+        listViewModelFactory = ListViewModelFactory(ShoesRepository(requireContext()))
         listViewModel = ViewModelProvider(this, listViewModelFactory)
             .get(ListViewModel::class.java)
 
