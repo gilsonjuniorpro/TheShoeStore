@@ -71,7 +71,7 @@ class DetailViewModel(
 
     fun setShoes(shoes: Shoes) {
         _shoes.value = shoes
-        pictureUri = if(shoes.pictureUri.isNullOrEmpty()) shoes.picture else shoes.pictureUri
+        pictureUri = if(shoes.pictureUri.isNullOrEmpty()) null else shoes.pictureUri
     }
 
     fun saveShoes(

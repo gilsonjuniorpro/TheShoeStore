@@ -48,6 +48,7 @@ class DetailFragment : Fragment() {
     private lateinit var shoesOriginal: DetailFragmentArgs
 
     private lateinit var uri: Uri
+    private var keepOriginal = true
 
     private val takePicture =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSaved ->
@@ -75,11 +76,18 @@ class DetailFragment : Fragment() {
 
     private val pickImages =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            uri?.let {
+            /*uri?.let {
                 imagePath = uri.toString()
                 val bitmap = Util.getBitmap(it)
                 binding.ivPicture.setImageBitmap(bitmap)
-            }
+            }*/
+            imagePath = uri.toString()
+            Glide
+                .with(requireActivity())
+                .load(uri)
+                .placeholder(R.drawable.shoes_sample)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(binding.ivPicture)
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -202,6 +210,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun choosePhotoFromGallery() {
+        keepOriginal = false
         pickImages.launch("image/*")
     }
 
@@ -218,6 +227,7 @@ class DetailFragment : Fragment() {
             photoFile
         )
 
+        keepOriginal = false
         takePicture.launch(uri)
     }
 
@@ -252,11 +262,17 @@ class DetailFragment : Fragment() {
     }
 
     private fun validateFields(): Boolean {
-        return when {
-            imagePath == null -> {
+        if(!keepOriginal){
+            if(imagePath.isNullOrEmpty()){
                 Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_image))
-                false
+                return false
             }
+            if(imagePath.isNullOrBlank()) {
+                Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_image))
+                return false
+            }
+        }
+        return when {
             binding.tietPrice.text.isNullOrEmpty() -> {
                 Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_price))
                 binding.tietPrice.requestFocus()

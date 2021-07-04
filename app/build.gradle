@@ -82,5 +82,7 @@ dependencies {
 
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
+    implementation "androidx.fragment:fragment:1.4.0-alpha04"
+
     implementation 'com.huangyz0918:androidwm:0.2.3'
 }
