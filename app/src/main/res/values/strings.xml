@@ -47,4 +47,7 @@
 
     <string name="msg_permission_success">Permissions Granted</string>
     <string name="msg_permission_error">Permissions Refused</string>
+    <string name="size_help_price_text">price sample: $99.00</string>
+    <string name="size_price_sample">$89.00</string>
+    <string name="edit">edit</string>
 </resources>

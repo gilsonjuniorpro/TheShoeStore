@@ -21,11 +21,11 @@
 
         <ImageView
             android:id="@+id/container"
-            android:layout_width="0dp"
-            android:layout_height="130dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="@dimen/size_base_no_value"
+            android:layout_height="@dimen/size_height_container_shoes"
+            android:layout_marginStart="@dimen/size_base_small_value"
+            android:layout_marginEnd="@dimen/size_base_small_value"
+            android:layout_marginBottom="@dimen/size_base_small_value"
             android:visibility="visible"
             android:background="@drawable/container_bg"
             android:contentDescription="@null"
@@ -35,11 +35,11 @@
 
         <ImageView
             android:id="@+id/containerBarra"
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="0dp"
+            android:layout_width="@dimen/size_base_no_value"
+            android:layout_height="@dimen/size_container_barra"
+            android:layout_marginStart="@dimen/size_base_quarter_medium_value"
+            android:layout_marginEnd="@dimen/size_base_quarter_medium_value"
+            android:layout_marginBottom="@dimen/size_base_no_value"
             android:background="@drawable/container_barra"
             android:contentDescription="@null"
             app:layout_constraintBottom_toBottomOf="@+id/container"
@@ -48,11 +48,11 @@
 
         <ImageView
             android:id="@+id/ivPicture"
-            android:layout_width="170dp"
-            android:layout_height="140dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="@dimen/size_image_width"
+            android:layout_height="@dimen/size_image_height"
+            android:layout_marginStart="@dimen/size_base_small_value"
+            android:layout_marginTop="@dimen/size_base_small_value"
+            android:layout_marginBottom="@dimen/size_base_medium_value"
             android:contentDescription="@string/app_name"
             android:scaleType="fitXY"
             app:shoesImage="@{shoes}"
@@ -63,11 +63,11 @@
 
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/size_base_no_value"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="@dimen/size_base_small_value"
+            android:layout_marginTop="@dimen/size_base_quarter_medium_value"
+            android:layout_marginEnd="@dimen/size_base_medium_value"
             android:ellipsize="end"
             android:maxLines="2"
             android:textColor="@color/black"
@@ -79,15 +79,15 @@
 
         <TextView
             android:id="@+id/tvDescription"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/size_base_no_value"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginTop="@dimen/size_base_small_value"
+            android:layout_marginEnd="@dimen/size_base_small_value"
             android:ellipsize="end"
             android:fontFamily="@font/roboto"
             android:maxLines="4"
             android:textColor="@color/black"
-            android:textSize="13sp"
+            android:textSize="@dimen/size_input_text_description"
             app:shoesDescription="@{shoes}"
             app:layout_constraintEnd_toEndOf="@+id/container"
             app:layout_constraintStart_toStartOf="@+id/tvName"
@@ -96,10 +96,10 @@
 
         <ImageView
             android:id="@+id/ivMoney"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="@dimen/size_icon_money_small"
+            android:layout_height="@dimen/size_icon_money_small"
+            android:layout_marginTop="@dimen/size_base_small_value"
+            android:layout_marginEnd="@dimen/size_base_small_value"
             android:alpha=".8"
             android:contentDescription="@string/app_name"
             app:layout_constraintEnd_toEndOf="@+id/container"
@@ -110,15 +110,15 @@
             android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="@dimen/size_base_small_value"
+            android:layout_marginTop="@dimen/size_base_small_value"
             android:fontFamily="@font/roboto"
             android:textColor="@color/colorPrice"
-            android:textSize="12sp"
+            android:textSize="@dimen/size_input_price"
             app:shoesPrice="@{shoes}"
             app:layout_constraintStart_toStartOf="@+id/ivPicture"
             app:layout_constraintTop_toTopOf="@+id/ivPicture"
-            tools:text="$89.00" />
+            tools:text="@string/size_price_sample" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
