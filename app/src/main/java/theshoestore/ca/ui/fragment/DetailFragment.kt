@@ -44,7 +44,7 @@ class DetailFragment : Fragment() {
     private lateinit var detailViewModelFactory: DetailViewModelFactory
     private lateinit var messageSuccess: String
     private var isInEditionMode = false
-    private var imagePath: String = ""
+    private var imagePath: String? = ""
     private lateinit var shoesOriginal: DetailFragmentArgs
 
     private lateinit var uri: Uri
@@ -113,7 +113,8 @@ class DetailFragment : Fragment() {
         shoesOriginal.shoe?.let { detailViewModel.setShoes(it) }
 
         if (shoesOriginal.shoe != null) {
-            detailViewModel.setShoes(shoesOriginal.shoe as Shoes)
+            //detailViewModel.setShoes(shoesOriginal.shoe as Shoes)
+            imagePath = detailViewModel.pictureUri
             Util.loadImage(shoesOriginal.shoe!!, requireContext(), binding.ivPicture)
             detailViewModel.setActionUpdate()
         } else {

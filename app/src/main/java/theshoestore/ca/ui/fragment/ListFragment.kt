@@ -38,10 +38,6 @@ class ListFragment : Fragment() {
 
         binding = FragmentListBinding.inflate(inflater, container, false)
 
-        Handler().postDelayed({
-            binding.progressBar.visibility = View.GONE
-        }, 2000L)
-
         listViewModelFactory = ListViewModelFactory(ShoesRepository(requireContext()))
         listViewModel = ViewModelProvider(this, listViewModelFactory)
             .get(ListViewModel::class.java)
@@ -75,6 +71,10 @@ class ListFragment : Fragment() {
 
         listViewModel.isPopulated.observe(viewLifecycleOwner, { isPopulated ->
             if (!isPopulated) {
+                binding.progressBar.visibility = View.VISIBLE
+                Handler().postDelayed({
+                    binding.progressBar.visibility = View.GONE
+                }, 2000L)
                 listViewModel.insertListShoes()
             }
         })

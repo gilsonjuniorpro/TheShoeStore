@@ -38,6 +38,8 @@ class DetailViewModel(
     val action: LiveData<Action>
         get() = _action
 
+    var pictureUri: String? = ""
+
     fun setActionCreate() {
         _action.value = Action.CREATE
     }
@@ -69,6 +71,7 @@ class DetailViewModel(
 
     fun setShoes(shoes: Shoes) {
         _shoes.value = shoes
+        pictureUri = if(shoes.pictureUri.isNullOrEmpty()) shoes.picture else shoes.pictureUri
     }
 
     fun saveShoes(
