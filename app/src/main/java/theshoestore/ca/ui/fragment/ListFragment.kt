@@ -91,32 +91,6 @@ class ListFragment : Fragment() {
         }
     }
 
-/*    private fun setView(list: List<Shoes>) {
-        val inflater : LayoutInflater = LayoutInflater.from(requireContext())
-        list.forEach { shoes ->
-            val view: View = inflater.inflate(R.layout.item_shoes, binding.recyclerShoes, false)
-            val picture: ImageView = view.findViewById(R.id.ivPicture)
-            val title: TextView = view.findViewById(R.id.tvName)
-            val description: TextView = view.findViewById(R.id.tvDescription)
-            val price: TextView = view.findViewById(R.id.tvPrice)
-
-            Glide
-                .with(requireContext())
-                .load(shoes.picture)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(picture)
-
-            title.text = shoes.title
-            description.text = shoes.description
-            price.text = shoes.price
-
-            view.setOnClickListener{
-                openDetail(shoes)
-            }
-            binding.recyclerShoes.addView(view)
-        }
-    }*/
-
     private fun openDetail(shoe: Shoes){
         findNavController().navigate(
                 ListFragmentDirections.actionListFragmentToDetailFragment(shoe))

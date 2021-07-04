@@ -1,9 +1,14 @@
 package theshoestore.ca.ui.fragment
 
 import android.Manifest
+import android.app.AlertDialog
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +16,13 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.jarvis.ca.Mark
 import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentDetailBinding
@@ -23,6 +31,9 @@ import theshoestore.ca.repository.ShoesRepository
 import theshoestore.ca.util.Util
 import theshoestore.ca.viewmodel.DetailViewModel
 import theshoestore.ca.viewmodel.DetailViewModelFactory
+import java.io.File
+import java.util.*
+import kotlin.random.Random
 
 
 class DetailFragment : Fragment() {
@@ -35,6 +46,21 @@ class DetailFragment : Fragment() {
     private var isInEditionMode = false
     private var imagePath: String = ""
     private lateinit var shoesOriginal: DetailFragmentArgs
+
+    private lateinit var uri: Uri
+
+    private val takePicture =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSaved ->
+            if (isSaved) {
+                imagePath = uri.toString()
+                Glide
+                    .with(requireActivity())
+                    .load(uri)
+                    .placeholder(R.drawable.shoes_sample)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.ivPicture)
+            }
+        }
 
     private val askMultiplePermissions =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
@@ -136,7 +162,7 @@ class DetailFragment : Fragment() {
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_GRANTED)
             ) {
-                pickImages.launch("image/*")
+                showPictureDialog()
             } else {
                 makeRequest()
             }
@@ -154,6 +180,44 @@ class DetailFragment : Fragment() {
         binding.ivBack.setOnClickListener {
             Util.cancelInsertOrEdition(requireContext(), findNavController(requireView()))
         }
+    }
+
+    private fun showPictureDialog() {
+        val items = arrayOf(getString(R.string.select_photo_from_gallery), getString(R.string.capture_photo_from_camera))
+
+        val pictureDialog = AlertDialog.Builder(requireContext())
+
+        pictureDialog.setTitle(getString(R.string.select_action))
+
+        pictureDialog.setItems(items) { _, which ->
+            if (which == 0) {
+                choosePhotoFromGallery()
+            } else {
+                takePhotoFromCamera()
+            }
+        }
+        val dialog = pictureDialog.create()
+        dialog.show()
+    }
+
+    private fun choosePhotoFromGallery() {
+        pickImages.launch("image/*")
+    }
+
+    private fun takePhotoFromCamera() {
+        val photoFile = File.createTempFile(
+            "shoes_app_${Calendar.getInstance().timeInMillis}",
+            ".jpg",
+            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        )
+
+        uri = FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.provider",
+            photoFile
+        )
+
+        takePicture.launch(uri)
     }
 
     private fun makeRequest() {

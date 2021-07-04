@@ -50,4 +50,7 @@
     <string name="size_help_price_text">price sample: $99.00</string>
     <string name="size_price_sample">$89.00</string>
     <string name="edit">edit</string>
+    <string name="select_action">"Select Action"</string>
+    <string name="select_photo_from_gallery">Select photo from gallery</string>
+    <string name="capture_photo_from_camera">Capture photo from camera</string>
 </resources>
