@@ -5,7 +5,7 @@
         android:id="@+id/edit"
         android:enabled="true"
         android:icon="@drawable/ic_edit"
-        android:title="edit"
+        android:title="@string/edit"
         android:visible="true"
         app:showAsAction="ifRoom" />
 </menu>

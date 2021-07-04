@@ -1,19 +1,10 @@
 package theshoestore.ca.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
-import android.view.Window
-import androidx.appcompat.app.AlertDialog
-import androidx.core.view.GravityCompat
-import androidx.navigation.Navigation
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import kotlinx.android.synthetic.main.fragment_on_boarding.*
 import theshoestore.ca.R
-import theshoestore.ca.ui.fragment.DetailFragment
-import theshoestore.ca.ui.fragment.DetailFragmentDirections
-import theshoestore.ca.ui.fragment.ListFragmentDirections
+import theshoestore.ca.core.ShoesApplication
 import theshoestore.ca.util.Util
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +14,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        ShoesApplication.setContentResolver(this.contentResolver)
     }
 
     override fun onBackPressed() {

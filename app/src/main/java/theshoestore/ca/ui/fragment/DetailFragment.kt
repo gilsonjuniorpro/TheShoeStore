@@ -1,15 +1,28 @@
 package theshoestore.ca.ui.fragment
 
+import android.Manifest
+import android.app.AlertDialog
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.jarvis.ca.Mark
 import theshoestore.ca.R
 import theshoestore.ca.databinding.FragmentDetailBinding
@@ -18,15 +31,64 @@ import theshoestore.ca.repository.ShoesRepository
 import theshoestore.ca.util.Util
 import theshoestore.ca.viewmodel.DetailViewModel
 import theshoestore.ca.viewmodel.DetailViewModelFactory
+import java.io.File
+import java.util.*
+import kotlin.random.Random
+
 
 class DetailFragment : Fragment() {
 
+    private val TAG = DetailFragment::class.java.simpleName
     private lateinit var binding: FragmentDetailBinding
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var detailViewModelFactory: DetailViewModelFactory
-    private var fakeImage: Int = 0
     private lateinit var messageSuccess: String
     private var isInEditionMode = false
+    private var imagePath: String? = ""
+    private lateinit var shoesOriginal: DetailFragmentArgs
+
+    private lateinit var uri: Uri
+    private var keepOriginal = true
+
+    private val takePicture =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSaved ->
+            if (isSaved) {
+                imagePath = uri.toString()
+                Glide
+                    .with(requireActivity())
+                    .load(uri)
+                    .placeholder(R.drawable.shoes_sample)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(binding.ivPicture)
+            }
+        }
+
+    private val askMultiplePermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { map ->
+            for (entry in map.entries) {
+                Toast.makeText(
+                    requireActivity(),
+                    "${entry.key} = ${entry.value}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+    private val pickImages =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            /*uri?.let {
+                imagePath = uri.toString()
+                val bitmap = Util.getBitmap(it)
+                binding.ivPicture.setImageBitmap(bitmap)
+            }*/
+            imagePath = uri.toString()
+            Glide
+                .with(requireActivity())
+                .load(uri)
+                .placeholder(R.drawable.shoes_sample)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(binding.ivPicture)
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +97,14 @@ class DetailFragment : Fragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? { //requireActivity()
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentDetailBinding.inflate(inflater, container, false)
 
         detailViewModelFactory = DetailViewModelFactory(ShoesRepository(requireContext()))
         detailViewModel = ViewModelProvider(this, detailViewModelFactory)
-                .get(DetailViewModel::class.java)
+            .get(DetailViewModel::class.java)
 
         binding.detailViewModel = detailViewModel
 
@@ -54,20 +116,14 @@ class DetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args = DetailFragmentArgs.fromBundle(requireArguments())
+        shoesOriginal = DetailFragmentArgs.fromBundle(requireArguments())
 
-        args.shoe?.let { detailViewModel.setShoes(it) }
+        shoesOriginal.shoe?.let { detailViewModel.setShoes(it) }
 
-        if (args.shoe != null) {
-            detailViewModel.setShoes(args.shoe as Shoes)
-            binding.ivPicture.setImageDrawable(
-                    args.shoe?.picture?.let {
-                        ResourcesCompat.getDrawable(resources, it, null)
-                    }
-            )
-            args.shoe?.picture?.let { image ->
-                setFakeImageForEdit(image)
-            }
+        if (shoesOriginal.shoe != null) {
+            //detailViewModel.setShoes(shoesOriginal.shoe as Shoes)
+            imagePath = detailViewModel.pictureUri
+            Util.loadImage(shoesOriginal.shoe!!, requireContext(), binding.ivPicture)
             detailViewModel.setActionUpdate()
         } else {
             detailViewModel.setActionCreate()
@@ -89,7 +145,7 @@ class DetailFragment : Fragment() {
                 setMessageSuccess(
                     getString(R.string.msg_shoes_added_success)
                 )
-            }else{
+            } else {
                 setMessageSuccess(
                     getString(R.string.msg_shoes_updated_success)
                 )
@@ -101,69 +157,122 @@ class DetailFragment : Fragment() {
             changeVisibility()
         })
 
-        binding.btRegister.setOnClickListener{
+        binding.btRegister.setOnClickListener {
             saveShoes()
         }
 
-        binding.ivAddPicture.setOnClickListener{
-            addFakeShoes()
+        binding.ivAddPicture.setOnClickListener {
+            if ((ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.CAMERA
+                ) == PackageManager.PERMISSION_GRANTED) &&
+                (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED)
+            ) {
+                showPictureDialog()
+            } else {
+                makeRequest()
+            }
         }
 
-        binding.ivSave.setOnClickListener{
-            if(isInEditionMode) {
+        binding.ivSave.setOnClickListener {
+            if (isInEditionMode) {
                 saveShoes()
-            }else{
+            } else {
                 isInEditionMode = true
                 detailViewModel.setEditEnabled()
             }
         }
 
-        binding.ivBack.setOnClickListener{
+        binding.ivBack.setOnClickListener {
             Util.cancelInsertOrEdition(requireContext(), findNavController(requireView()))
         }
+    }
+
+    private fun showPictureDialog() {
+        val items = arrayOf(getString(R.string.select_photo_from_gallery), getString(R.string.capture_photo_from_camera))
+
+        val pictureDialog = AlertDialog.Builder(requireContext())
+
+        pictureDialog.setTitle(getString(R.string.select_action))
+
+        pictureDialog.setItems(items) { _, which ->
+            if (which == 0) {
+                choosePhotoFromGallery()
+            } else {
+                takePhotoFromCamera()
+            }
+        }
+        val dialog = pictureDialog.create()
+        dialog.show()
+    }
+
+    private fun choosePhotoFromGallery() {
+        keepOriginal = false
+        pickImages.launch("image/*")
+    }
+
+    private fun takePhotoFromCamera() {
+        val photoFile = File.createTempFile(
+            "shoes_app_${Calendar.getInstance().timeInMillis}",
+            ".jpg",
+            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        )
+
+        uri = FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.provider",
+            photoFile
+        )
+
+        keepOriginal = false
+        takePicture.launch(uri)
+    }
+
+    private fun makeRequest() {
+        askMultiplePermissions.launch(
+            arrayOf(
+                Manifest.permission.CAMERA,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+        )
     }
 
     private fun setMessageSuccess(message: String) {
         this.messageSuccess = message
     }
 
-    private fun changeIconSaveOrEdit(){
+    private fun changeIconSaveOrEdit() {
         binding.ivSave.setImageDrawable(
             ResourcesCompat.getDrawable(resources, R.drawable.ic_done, null)
         )
     }
 
-    private fun changeIconShoesToSample(){
+    private fun changeIconShoesToSample() {
         binding.ivPicture.setImageDrawable(
             ResourcesCompat.getDrawable(resources, R.drawable.shoes_sample, null)
         )
     }
 
-    private fun changeVisibility(){
+    private fun changeVisibility() {
         binding.ivAddPicture.visibility = View.VISIBLE
         binding.viewAdd.visibility = View.VISIBLE
     }
 
-    private fun addFakeShoes() {
-        fakeImage = Util.getImage()
-
-        binding.ivPicture.setImageDrawable(
-            ResourcesCompat.getDrawable(resources, fakeImage, null)
-        )
-
-        Mark.showAlertSuccess(requireActivity(), getString(R.string.msg_fake_image_added))
-    }
-
-    private fun setFakeImageForEdit(image: Int){
-        fakeImage = image
-    }
-
-    private fun validateFields() : Boolean{
-        return when {
-            fakeImage == 0 -> {
+    private fun validateFields(): Boolean {
+        if(!keepOriginal){
+            if(imagePath.isNullOrEmpty()){
                 Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_image))
-                false
+                return false
             }
+            if(imagePath.isNullOrBlank()) {
+                Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_image))
+                return false
+            }
+        }
+        return when {
             binding.tietPrice.text.isNullOrEmpty() -> {
                 Mark.showAlertError(requireActivity(), getString(R.string.msg_fill_price))
                 binding.tietPrice.requestFocus()
@@ -185,14 +294,20 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun saveShoes(){
-        if(validateFields()){
+    private fun saveShoes() {
+        if (validateFields()) {
             isInEditionMode = false
-            val shoesName: String = binding.tietName.text.toString()
-            val shoesPrice: String = binding.tietPrice.text.toString()
-            val shoesDescription: String = binding.tietDescription.text.toString()
-
-            detailViewModel.saveShoes(shoesName, shoesPrice, shoesDescription, fakeImage)
+            val shoesName: String? =
+                if (binding.tietName.text.isNullOrBlank()) shoesOriginal.shoe?.title
+                else binding.tietName.text.toString()
+            val shoesPrice: String? =
+                if (binding.tietPrice.text.isNullOrBlank()) shoesOriginal.shoe?.price
+                else binding.tietPrice.text.toString()
+            val shoesDescription: String? =
+                if (binding.tietDescription.text.isNullOrBlank()) shoesOriginal.shoe?.description
+                else binding.tietDescription.text.toString()
+            val picture = shoesOriginal.shoe?.picture ?: ""
+            detailViewModel.saveShoes(shoesName, shoesPrice, shoesDescription, picture, imagePath)
             navigateToList()
         }
     }
@@ -202,15 +317,12 @@ class DetailFragment : Fragment() {
         Handler().postDelayed({
             binding.progressBar.visibility = View.GONE
             findNavController(requireView()).navigate(
-                    DetailFragmentDirections.actionDetailFragmentToListFragment())
+                DetailFragmentDirections.actionDetailFragmentToListFragment()
+            )
         }, 2000L)
     }
 
     private fun getMessageSuccess(): String {
         return this.messageSuccess
     }
-}
-
-fun String.toName(): String {
-    return this.toUpperCase()
 }

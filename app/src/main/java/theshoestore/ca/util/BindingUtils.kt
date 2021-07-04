@@ -2,19 +2,13 @@ package theshoestore.ca.util
 
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import theshoestore.ca.model.Shoes
 
 @BindingAdapter("shoesImage")
 fun ImageView.setShoesImage(shoes: Shoes?) {
     shoes?.let {
-        setImageDrawable(
-            ResourcesCompat.getDrawable(
-                resources,
-                shoes.picture, null
-            )
-        )
+        Util.loadImage(it, this.context, this)
     }
 }
 

@@ -1,16 +1,17 @@
 package theshoestore.ca.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import theshoestore.ca.model.Shoes
+import theshoestore.ca.model.ShoesDto
+import theshoestore.ca.repository.ShoesHttp
 import theshoestore.ca.repository.ShoesRepository
-import theshoestore.ca.util.PrefManager
 import theshoestore.ca.util.Util
 
 class ListViewModel(
-    private val repository: ShoesRepository,
-    application: Application
+    private val repository: ShoesRepository
 ) : ViewModel() {
     private val _shoes = MutableLiveData<Shoes>()
     val shoes: LiveData<Shoes>
@@ -20,15 +21,20 @@ class ListViewModel(
     val isPopulated: LiveData<Boolean>
         get() = _isPopulated
 
-    private val mPrefManager = PrefManager(application)
+    private val _state = MutableLiveData<State>()
+    val state: LiveData<State>
+        get() = _state
 
     fun setPopulated() {
         _isPopulated.value = true
-        mPrefManager.setPopulated(true)
     }
 
     init {
-        _isPopulated.value = mPrefManager.isPopulated()
+        viewModelScope.launch {
+            withContext(Dispatchers.IO){
+                _isPopulated.postValue(repository.count() > 0)
+            }
+        }
     }
 
     val allShoes = repository.getAllShoes().asLiveData()
@@ -59,10 +65,26 @@ class ListViewModel(
 
     fun insertListShoes(){
         viewModelScope.launch{
-            val list = Util.getListOfShoes()
-            list.forEach{ shoes ->
-                repository.saveShoes(shoes)
+            _state.value = State.Loading
+
+            val list = withContext(Dispatchers.IO) {
+                ShoesHttp.fetchData()
+            }
+            if(list?.items == null){
+                _state.value = State.Error(Exception("Error loading books"), false)
+            }else{
+                _state.value = State.Loaded(list.items)
+            }
+
+            list?.items?.forEach{ shoes ->
+                repository.saveShoes(Util.mapShoesDtoToShoes(shoes))
             }
         }
+    }
+
+    sealed class State {
+        object Loading: State()
+        data class Loaded(val items: List<ShoesDto>): State()
+        data class Error(val e: Throwable, var hasConsumed: Boolean): State()
     }
 }

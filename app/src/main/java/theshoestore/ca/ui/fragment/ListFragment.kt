@@ -1,13 +1,12 @@
 package theshoestore.ca.ui.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import theshoestore.ca.R
@@ -39,9 +38,7 @@ class ListFragment : Fragment() {
 
         binding = FragmentListBinding.inflate(inflater, container, false)
 
-        val application = requireNotNull(this.activity).application
-
-        listViewModelFactory = ListViewModelFactory(ShoesRepository(requireContext()), application)
+        listViewModelFactory = ListViewModelFactory(ShoesRepository(requireContext()))
         listViewModel = ViewModelProvider(this, listViewModelFactory)
             .get(ListViewModel::class.java)
 
@@ -69,12 +66,16 @@ class ListFragment : Fragment() {
 
         listViewModel.allShoes.observe(viewLifecycleOwner, { list ->
             adapter.submitList(list)
+            binding.recyclerShoes.scrollToPosition(0)
         })
 
         listViewModel.isPopulated.observe(viewLifecycleOwner, { isPopulated ->
             if (!isPopulated) {
+                binding.progressBar.visibility = View.VISIBLE
+                Handler().postDelayed({
+                    binding.progressBar.visibility = View.GONE
+                }, 2000L)
                 listViewModel.insertListShoes()
-                listViewModel.setPopulated()
             }
         })
 
@@ -87,33 +88,6 @@ class ListFragment : Fragment() {
 
         binding.ivAdd.setOnClickListener{
             openAddShoes()
-        }
-    }
-
-    private fun setView(list: List<Shoes>) {
-        val inflater : LayoutInflater = LayoutInflater.from(requireContext())
-        list.forEach { shoes ->
-            val view: View = inflater.inflate(R.layout.item_shoes, binding.recyclerShoes, false)
-            val picture: ImageView = view.findViewById(R.id.ivPicture)
-            val title: TextView = view.findViewById(R.id.tvName)
-            val description: TextView = view.findViewById(R.id.tvDescription)
-            val price: TextView = view.findViewById(R.id.tvPrice)
-
-            picture.setImageDrawable(
-                    ResourcesCompat.getDrawable(
-                            resources,
-                            shoes.picture, null
-                    )
-            )
-
-            title.text = shoes.title
-            description.text = shoes.description
-            price.text = shoes.price
-
-            view.setOnClickListener{
-                openDetail(shoes)
-            }
-            binding.recyclerShoes.addView(view)
         }
     }
 
